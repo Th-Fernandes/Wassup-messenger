@@ -1,12 +1,19 @@
-import Chat from "components/Chat/Chat.jsx"
+import { Box } from '@skynexui/components';
+import {fullDefaultSection} from "common/styles/defaultSection"
+import SignAction from "components/SignAction/SignAction"
 
-
-
-export default function Home() {
-
+export default function Login() {
   return (
-    <>
-     hello world
-    </>
+    <main>
+      <Box
+      as="section"
+      styleSheet={{
+        ...fullDefaultSection,
+        display: 'flex'
+      }}
+     >
+       <SignAction />
+     </Box>
+    </main>
   )
 }
