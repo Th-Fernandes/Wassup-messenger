@@ -3,6 +3,7 @@ import colors from "common/colors.json"
 import unknowIcon from "../../../../public/unknown-user.jpg"
 import sendIcon from "../../../../public/send-message.svg"
 import { supabase } from 'common/utils/supabaseClient';
+import { createClient } from '@supabase/supabase-js'
 import { useEffect, useState } from 'react';
 
 export default function Messages() {
@@ -18,23 +19,29 @@ export default function Messages() {
 
   function handleSubmitMessage(event) {
     event.preventDefault()
-
-    if(inputMessage) {
-       setSubmitMessage(test => !test)
-      
-    }
+    if(inputMessage) setSubmitMessage(test => !test)
   }
 
+
   useEffect(() => {
-    
+
+    function insertRealTime (addMessage) {
+      const mySubscription = supabase
+        .from('messages')
+        .on('INSERT', response => {
+         addMessage(response.new)
+        })
+        .subscribe()
+
+        return mySubscription
+    }
 
     async function fetchMessages() {
       const { data, error } = await supabase
         .from('messages')
         .select('*')
-          setMessages(data)
-          console.log(data)
-          //const scrollForBottom = setTimeout( () => document.querySelector('#chatBox').scrollTo(0, document.querySelector('#chatBox').scrollHeight ), 2000)
+        .order('id', { ascending: false })    
+        setMessages(data)   
     }
 
     if(inputMessage) {
@@ -44,14 +51,23 @@ export default function Messages() {
           .insert([
             { username: 'jato', message: inputMessage}           
         ])
-
         setInputMessage('')
-        setMessages(oldData => [...oldData,...data])
+     
       }
-      createMessage()
+
+     
+
+      
+      createMessage()      
     }
+
+    insertRealTime(newMessage => {
+      console.log(newMessage)
+      setMessages(oldMessages => [...oldMessages, newMessage])
+    })
     fetchMessages()
-    //document.querySelector('#chatBox').scrollTo(0, document.querySelector('#chatBox').scrollHeight )
+    
+    
     
    }, [submitMessage])
 
@@ -128,6 +144,7 @@ export default function Messages() {
           rounded='full'
           value={inputMessage}
           styleSheet={{ width: '90%' }}
+          autoComplete="off"
         />
         <Image
           src={sendIcon.src}

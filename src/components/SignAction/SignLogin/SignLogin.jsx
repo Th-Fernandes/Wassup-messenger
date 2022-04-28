@@ -7,9 +7,9 @@ import { useRouter } from "next/router";
 export default function SignLogin () {
   const [sign, setSign] = useState('login')
   const [inputData, setInputData] = useState({email: '', password: ''})
-  const [submit, setSubmit] = useState(false)
   const router = useRouter()
 
+  
   function handleGetInput(input, dataType) {
     const userData = input.target.value 
 
@@ -17,28 +17,57 @@ export default function SignLogin () {
     console.log(inputData)
   }
 
-  useEffect(() =>{
-    async function signUp() {
-      const { user, session, error } = await supabase.auth.signUp(inputData)
-    }
+  // useEffect(() =>{
+  //   async function signUp() {
+  //     const { user, session, error } = await supabase.auth.signUp(inputData)
 
-    async function signIn() {
-      const { user, session, error } = await supabase.auth.signIn(inputData)
-      if(user) router.push('/chat')
-    }
+  //     console.log('signup')
+  //   }
+
+  //   async function signIn() {
+  //     const { user, session, error } = await supabase.auth.signIn(inputData)
+  //     console.log('signin')
+
+  //     if(user) router.push('/chat')
+  //   }
     
-    submit && sign == 'signUp' 
-      ? signUp() 
-      : signIn()
-  }, [submit])
 
+  //     sign == 'login' 
+  //     ? signIn() 
+  //     : signUp()   
+  // }, [submit])
+
+  
+  async function handleSignIn()  {
+    const { error: signInError } = await supabase.auth.signIn(inputData)
+    if (signInError) {
+      setAuthError(signInError.message)
+      return 
+    }
+  
+    router.push('/chat')
+  }
+
+  async function handleSignUp() {
+    const {user, session, error: signUpError } = await supabase.auth.signUp(inputData)
+    if (signUpError) {
+      console.log(signUpError.message)
+    } 
+
+  }
+
+  useEffect(() => {
+    const session = supabase.auth.session()
+    
+    if(session) router.push('/chat')
+  }, [])
 
   return (
     <Box
       as='form' 
       onSubmit={(event) => {
         event.preventDefault()
-        setSubmit(true)
+        sign == 'login' ? handleSignIn() : handleSignUp()
       }}
       styleSheet={{
         flexGrow: 1, 
