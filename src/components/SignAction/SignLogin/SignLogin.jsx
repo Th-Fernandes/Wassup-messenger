@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 import { supabase } from "common/utils/supabaseClient";
 import { useRouter } from "next/router";
 
-export default function SignLogin () {
+
+export default function SignLogin ({emailModal}) {
   const [sign, setSign] = useState('login')
   const [inputData, setInputData] = useState({email: '', password: ''})
+  const [authError, setAuthError] = useState()
   const router = useRouter()
 
   
@@ -16,32 +18,12 @@ export default function SignLogin () {
     setInputData( latestState => ({ ...latestState, [dataType]: userData}))
     console.log(inputData)
   }
-
-  // useEffect(() =>{
-  //   async function signUp() {
-  //     const { user, session, error } = await supabase.auth.signUp(inputData)
-
-  //     console.log('signup')
-  //   }
-
-  //   async function signIn() {
-  //     const { user, session, error } = await supabase.auth.signIn(inputData)
-  //     console.log('signin')
-
-  //     if(user) router.push('/chat')
-  //   }
-    
-
-  //     sign == 'login' 
-  //     ? signIn() 
-  //     : signUp()   
-  // }, [submit])
-
   
   async function handleSignIn()  {
     const { error: signInError } = await supabase.auth.signIn(inputData)
     if (signInError) {
       setAuthError(signInError.message)
+      console.error(signInError.message)
       return 
     }
   
@@ -51,8 +33,13 @@ export default function SignLogin () {
   async function handleSignUp() {
     const {user, session, error: signUpError } = await supabase.auth.signUp(inputData)
     if (signUpError) {
-      console.log(signUpError.message)
-    } 
+      console.log(signUpError)
+      setAuthError(signUpError.message)
+    } else {
+      emailModal(true)
+      setSign('login')
+      setInputData({email: '', password: ''})
+    }
 
   }
 
@@ -77,6 +64,7 @@ export default function SignLogin () {
       }}  
       action=""
     >
+      
       <fieldset style={{border: 'none'}} >
         <Text 
           as='legend'
@@ -84,6 +72,14 @@ export default function SignLogin () {
         >
           {sign === 'login' ? 'LOGIN' : 'CRIAR CONTA' }
         </Text>
+
+        {authError && 
+          <span 
+          style={{color: colors.primary["red-error"] , fontSize: 'clamp(12px, 14px, 16px)'}}
+          >
+            {authError}
+          </span>}
+
 
         <TextField
           onChange={el => handleGetInput(el, 'email')}
@@ -95,6 +91,7 @@ export default function SignLogin () {
             marginTop: '1.5rem',
             margin: '0 auto'
           }}
+          value={inputData.email}
 
         />
         <TextField
@@ -107,6 +104,7 @@ export default function SignLogin () {
             marginTop: '1.5rem',
             margin: '0 auto'
           }}
+          value={inputData.password}
         />
 
         <Button 

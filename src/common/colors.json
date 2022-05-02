@@ -7,10 +7,12 @@
     "black-200": "#504B3A",
     "black-300": "#3B372B",
     "black-500": "#23211A",
-    "black-700": "#0C0B09"
+    "black-700": "#0C0B09",
+    "black-modal-bg": "rgba(12, 11, 9, 0.6)"
   },
   "primary": {
-    "purple": "#6636f1"
+    "purple": "#6636f1",
+    "red-error": "#C95940"
   }
 
 }

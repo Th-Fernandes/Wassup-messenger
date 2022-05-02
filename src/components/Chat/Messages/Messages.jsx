@@ -3,7 +3,6 @@ import colors from "common/colors.json"
 import unknowIcon from "../../../../public/unknown-user.jpg"
 import sendIcon from "../../../../public/send-message.svg"
 import { supabase } from 'common/utils/supabaseClient';
-import { createClient } from '@supabase/supabase-js'
 import { useEffect, useState } from 'react';
 
 export default function Messages() {
@@ -24,11 +23,11 @@ export default function Messages() {
 
 
   useEffect(() => {
-
     function insertRealTime (addMessage) {
       const mySubscription = supabase
         .from('messages')
-        .on('INSERT', response => {
+        .on('*', response => {
+          console.log(response.new)
          addMessage(response.new)
         })
         .subscribe()
@@ -40,8 +39,8 @@ export default function Messages() {
       const { data, error } = await supabase
         .from('messages')
         .select('*')
-        .order('id', { ascending: false })    
-        setMessages(data)   
+        .order('id', { ascending: true })    
+        setMessages( data)  
     }
 
     if(inputMessage) {
@@ -52,23 +51,20 @@ export default function Messages() {
             { username: 'jato', message: inputMessage}           
         ])
         setInputMessage('')
-     
       }
-
-     
-
-      
       createMessage()      
-    }
-
+    }  
+    fetchMessages()
     insertRealTime(newMessage => {
       console.log(newMessage)
       setMessages(oldMessages => [...oldMessages, newMessage])
     })
-    fetchMessages()
-    
-    
-    
+
+    setTimeout(() => {
+      const chat = document.querySelector("#chatBox")
+      window.document.querySelector('#chatBox').scrollTo(0, chat.scrollHeight) 
+    }, 200)
+
    }, [submitMessage])
 
   return (
@@ -82,6 +78,7 @@ export default function Messages() {
           borderRadius: '0.8rem',
           height: { xs: '95%', md: '95%' },
           overflowY: 'scroll',
+          scrollBehavior: 'smooth'
         }}
       >
         <Box as='ul'
