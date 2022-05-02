@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": "src",
     "paths": {
       "@static-img": ["/public/send-message.svg"]
     }
   },
+  "include": ["src"]
 }  

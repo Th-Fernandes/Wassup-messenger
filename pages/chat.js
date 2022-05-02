@@ -1,7 +1,7 @@
-import Chat from "components/Chat/Chat.jsx";
 import { Box } from '@skynexui/components';
-import {defaultSection} from "common/styles/defaultSection"
 import { useEffect } from "react";
+import Chat from "components/Chat/Chat.jsx";
+import {defaultSection} from "common/styles/defaultSection"
 import { supabase } from "common/utils/supabaseClient";
 import {useRouter} from "next/router"
  
