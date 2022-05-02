@@ -1,6 +1,6 @@
 import { Box } from '@skynexui/components';
 import {fullDefaultSection} from "../src/common/styles/defaultSection"
-import SignAction from "components/SignAction/SignAction"
+import SignAction from "../src/components/SignAction/SignAction"
 
 
 export default function Login() {

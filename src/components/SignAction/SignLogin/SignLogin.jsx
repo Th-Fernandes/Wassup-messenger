@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 
 export default function SignLogin ({emailModal}) {
   const [sign, setSign] = useState('login')
-  const [inputData, setInputData] = useState({email: '', password: ''})
+  const [inputData, setInputData] = useState({email: '', password: '', username: 'dot'})
   const [authError, setAuthError] = useState()
   const router = useRouter()
 

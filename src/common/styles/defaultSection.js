@@ -1,4 +1,4 @@
-import colors from "common/colors.json"
+import colors from "../colors.json"
 
 const defaultSection = {
   width: '100%',
