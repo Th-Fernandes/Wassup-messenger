@@ -1,6 +1,6 @@
 import { Box, Text, Button } from '@skynexui/components';
 import Messages from './Messages/Messages';
-import colors from "common/colors.json"
+import colors from "../../common/colors.json"
 import {useRouter} from "next/router"
 import { supabase } from 'common/utils/supabaseClient';
 

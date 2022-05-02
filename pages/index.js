@@ -1,5 +1,5 @@
 import { Box } from '@skynexui/components';
-import {fullDefaultSection} from "common/styles/defaultSection"
+import {fullDefaultSection} from "../src/common/styles/defaultSection"
 import SignAction from "components/SignAction/SignAction"
 
 
