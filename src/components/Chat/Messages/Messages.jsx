@@ -74,8 +74,6 @@ export default function Messages() {
 
    }, [submitMessage])
 
-   
-
   return (
     <>
       <Box
@@ -111,25 +109,36 @@ export default function Messages() {
 
       <Box
         as='form'
-        onSubmit={event => handleSubmitMessage(event) }
+        onSubmit={event => {
+          console.log(event)
+          handleSubmitMessage(event) 
+        }}
         styleSheet={{
           position: 'relative',
-          top: '-55px',
+          top: '-70px',
           zIndex: 999,
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'end',
+          alignItems: 'center',
           gap: '1rem',
           padding: '0 2.5rem'
         }}
       >
 
         <TextField
-        placeholder='digite sua mensagem aqui'
+          type='textarea'
+          placeholder='digite sua mensagem aqui'
+          onKeyPress={(event) => {if(event.key ==='Enter') handleSubmitMessage(event)}}
           onChange={element => handleInputValue(element)}
           rounded='full'
           value={inputMessage}
-          styleSheet={{ width: '90%' }}
+          styleSheet={{ 
+            width: '90%', 
+            minHeight: '100%',
+            maxHeight: '50rem',
+            overflowY: 'auto',
+            
+          }}
           autoComplete="off"
         />
         

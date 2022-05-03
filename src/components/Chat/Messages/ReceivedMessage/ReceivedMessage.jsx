@@ -1,6 +1,7 @@
 import { Box, Image, } from '@skynexui/components';
 import unknownIcon from "../../../../../public/unknown-user.jpg"
 import colors from "../../../../common/colors.json"
+
 export default function ReceivedMessage({messageData}) {
 
   function handleMessageTime(messageDate) {
@@ -20,7 +21,8 @@ export default function ReceivedMessage({messageData}) {
           backgroundColor: colors.neutrals['black-200'],
           maxWidth: '50rem',
           padding: '1.6rem 0.8rem',
-          borderRadius: '1.6rem 1.6rem 1.6rem 0'
+          borderRadius: '1.6rem 1.6rem 1.6rem 0',
+          wordBreak: 'break-all'
         }}
       >
         {messageData.message}

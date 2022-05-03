@@ -1,6 +1,6 @@
 import wassupIcon from '../../../../public/wassup-icon.png';
 import { Box, Image, Text } from '@skynexui/components';
-import colors from "common/colors.json";
+import colors from "../../../common/colors.json";
 
 
 export default function AsideInfo() {

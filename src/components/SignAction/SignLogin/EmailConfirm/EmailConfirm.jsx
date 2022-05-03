@@ -1,5 +1,5 @@
 import { Box, Image, Text, Button } from "@skynexui/components";
-import colors from "common/colors.json"
+import colors from "../../../../common/colors.json"
 import emailIcon from "../../../../../public/email-icon.svg"
 import {useRouter} from "next/router"
 

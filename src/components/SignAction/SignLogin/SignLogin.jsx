@@ -1,7 +1,7 @@
 import { Text, Box, TextField, Button } from "@skynexui/components"
-import colors from "common/colors.json";
+import colors from "../../../common/colors.json";
 import { useEffect, useState } from "react";
-import { supabase } from "common/utils/supabaseClient";
+import { supabase } from "../../../common/utils/supabaseClient";
 import { useRouter } from "next/router";
 
 

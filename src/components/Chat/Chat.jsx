@@ -3,11 +3,13 @@ import Messages from './Messages/Messages';
 import colors from "../../common/colors.json"
 import { useRouter } from "next/router"
 import { supabase } from '../../common/utils/supabaseClient';
-import { DefaultModal } from 'components/DefaultModal/DefaultModal';
+import { DefaultModal } from '../../components/DefaultModal/DefaultModal';
 import { useState } from 'react';
+import { List } from 'phosphor-react';
 
 export default function Chat() {
   const [logoutModal, setLogoutModal] = useState(false)
+  const [isConfigOpened, setIsConfigOpened] = useState(false)
   const router = useRouter()
 
 
@@ -22,15 +24,12 @@ export default function Chat() {
     <Box
       styleSheet={{ height: {xs: '95%', md: '98%', lg: '100%'} }}
     >
-      <Box as='header'
-        styleSheet={{ display: 'flex' }}
-      >
-        {
+      {
           logoutModal &&
           <DefaultModal>
             <Box styleSheet={{ textAlign: 'center' }}>
               <h2 style={{fontSize: '4rem'}}>Deseja mesmo sair?</h2>
-              <p style={{fontSize: '2.5rem'}}>Ao confirmar, você confirma que deseja sair de sua conta</p>
+              <p style={{fontSize: '2.5rem'}}>você confirma que deseja sair de sua conta?</p>
 
               <ul style={{ display: 'flex', justifyContent: 'center', gap: '2rem', marginTop: '1.5rem' }}>
                 <li> 
@@ -63,6 +62,10 @@ export default function Chat() {
           </DefaultModal>
         }
 
+      <Box as='header'
+        styleSheet={{ display: 'flex' }}
+      >
+      
         <Text as="h1"
           styleSheet={{
             fontFamily: "'Lexend Deca', sans-serif",
@@ -72,19 +75,38 @@ export default function Chat() {
         >
           WASSUP MESSENGER
         </Text>
-        <Button
-          iconName="arrowRight"
-          buttonColors={{
-            contrastColor: '#FFFFFF',
-            mainColor: colors.primary['purple'],
-          }}
-          onClick={() => setLogoutModal(true)}
-        />
+
+        <button 
+          style={{backgroundColor: 'transparent'}} 
+          onClick={() => setIsConfigOpened(oldState => !oldState)}
+          onBlur={() => isConfigOpened ? setIsConfigOpened(false) : null}
+        >
+          <List size={56} weight="fill" color="#fff"   />
+
+          <Box
+            as='ul'
+            
+            styleSheet={{
+              position: 'fixed',
+              right: {xs: '1%', md: '3%', xl:' 10%'},
+              backgroundColor: colors.neutrals["black-200"],
+              width: '30rem'
+            }}
+          >
+            {
+              isConfigOpened &&
+              <>
+                <li>Perfil</li>
+                <li onClick={() => setLogoutModal(true)}>sair da conta</li>
+              </>
+            }
+          </Box>
+        </button>
+        
+      
       </Box>
 
       <Messages />
-
-
     </Box>
   )
 }

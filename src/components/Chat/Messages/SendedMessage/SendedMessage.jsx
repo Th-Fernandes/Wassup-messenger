@@ -16,7 +16,8 @@ export default function SendedMessage({messageData}) {
           backgroundColor: colors.primary['purple'],
           maxWidth: '50rem',
           padding: '1.6rem 0.8rem',
-          borderRadius: '1.6rem 1.6rem  0 1.6rem'
+          borderRadius: '1.6rem 1.6rem  0 1.6rem',
+          wordBreak: 'break-all'
         }}
       >
         {messageData.message}
