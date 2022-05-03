@@ -1,7 +1,16 @@
 import { Box, Image, } from '@skynexui/components';
-import unknowIcon from "../../../../../public/unknown-user.jpg"
+import unknownIcon from "../../../../../public/unknown-user.jpg"
 import colors from "../../../../common/colors.json"
-export default function RecievedMessage({messageData}) {
+export default function ReceivedMessage({messageData}) {
+
+  function handleMessageTime(messageDate) {
+    //o dado recebido como argumento é como isso: 2022-05-02T18:37:53.961699+00:00
+    const divideInfo = messageDate.split('T')
+    const getHour = divideInfo[1].split('.')
+
+    return getHour[0]
+  }
+
   return (
     <li
       style={{ margin: '3rem 0',  display: 'flex', flexWrap: 'wrap'}}
@@ -24,12 +33,15 @@ export default function RecievedMessage({messageData}) {
         }}
       >
         <Image
-          src={unknowIcon.src}
+          src={unknownIcon.src}
           styleSheet={{ width: '2.5rem' }}
         />
         <span style={{ marginLeft: '0.5rem' }}>{messageData.username}</span>
         <span style={{ marginLeft: '0.5rem', color: colors.neutrals['white-500'] }}>
-          {messageData.created_at}
+          {
+            handleMessageTime(messageData.created_at)
+            
+          }
         </span>
 
       </Box>

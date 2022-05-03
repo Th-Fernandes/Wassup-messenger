@@ -1,21 +1,10 @@
-import { Box, Text, Image, TextField } from '@skynexui/components';
+import { Box, Text, Image, TextField, Button } from '@skynexui/components';
 import colors from "../../../common/colors.json"
-import RecievedMessage from './ReceivedMessage/ReceivedMessage';
+import ReceivedMessage from './ReceivedMessage/ReceivedMessage';
 import SendedMessage from './SendedMessage/SendedMessage';
 import sendIcon from "../../../../public/send-message.svg"
 import { supabase } from '../../../common/utils/supabaseClient';
 import { useEffect, useState } from 'react';
-
-/*
-  - estilização de minhas msgs [x]
-
-  - condicional para conferir se a msg é minha ou não
-    1: pegar o id da session do path da supabase[x]
-    2: inserior esse dado no obj da msg que vai ser inserida no database[x]
-    3: fazer um ternario pra conferir se o id da sessao atual coincide com o do obj da msg
-      a - se coicidir, imprimir o estilo a direira
-      b - se n, imprimir o estilo a esquerda
-*/
 
 export default function Messages() {
   const [messages, setMessages] = useState([])
@@ -94,6 +83,7 @@ export default function Messages() {
         styleSheet={{
           backgroundColor: colors.neutrals['black-300'],
           padding: '1.6rem',
+          margin: {xs: '0.8rem', sm: 0},
           marginTop: '1.2rem',
           borderRadius: '0.8rem',
           height: { xs: '95%', md: '95%' },
@@ -101,7 +91,9 @@ export default function Messages() {
           scrollBehavior: 'smooth'
         }}
       >
-        <Box as='ul'
+        <Box 
+          as='ul'
+          styleSheet={{paddingBottom: '4rem'}}
         >
           {
             messages &&
@@ -110,7 +102,7 @@ export default function Messages() {
                 return <SendedMessage messageData={data} key={index + '-SD'} />
                 
               } else {
-                return <RecievedMessage messageData={data} key={index + '-RC'}  />
+                return <ReceivedMessage messageData={data} key={index + '-RC'}  />
               }
             })
           }
@@ -122,26 +114,31 @@ export default function Messages() {
         onSubmit={event => handleSubmitMessage(event) }
         styleSheet={{
           position: 'relative',
-          top: '-45px',
+          top: '-55px',
           zIndex: 999,
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+          justifyContent: 'center',
+          alignItems: 'end',
+          gap: '1rem',
           padding: '0 2.5rem'
         }}
       >
 
         <TextField
+        placeholder='digite sua mensagem aqui'
           onChange={element => handleInputValue(element)}
           rounded='full'
           value={inputMessage}
           styleSheet={{ width: '90%' }}
           autoComplete="off"
         />
+        
+        <button style={{marginTop: '-0.5rem'}}>
         <Image
           src={sendIcon.src}
           styleSheet={{ cursor: 'pointer' }}
         />
+        </button>
       </Box>
     </>
 

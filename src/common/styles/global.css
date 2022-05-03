@@ -6,6 +6,8 @@
 
 html {
   font-size: 62.5%;
+  --purple-primary: #6636f1;
+  --white-100: #FFFFFF;
 }
 
 
@@ -14,6 +16,16 @@ body {
   min-height: 100vh;
   max-width: 144rem;
   margin: 0 auto;
+}
+
+::selection:not(img)   {
+  background-color: var(--purple-primary);
+  color: var(--white-100)
+}
+
+img::selection {
+  background: none;
+  color: transparent;
 }
 
 body  main {
@@ -32,4 +44,23 @@ ul {
   color: #F5F5F5;
 }
 
+button {
+  cursor: pointer;
+  border: none;
+  background-color: var(--purple-primary);
+  min-height: 2.7rem;
+  border-radius: 0.8rem;
+  font-size: 1.6rem;
+}
 
+/* ================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    visibility: hidden;
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
+  }
+}

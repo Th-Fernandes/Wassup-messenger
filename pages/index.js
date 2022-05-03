@@ -7,11 +7,11 @@ export default function Login() {
   return (
     <main>
       <Box
-      as="section"
-      styleSheet={{
-        ...fullDefaultSection,
-        display: 'flex'
-      }}
+        as="section"
+        styleSheet={{
+          ...fullDefaultSection,
+          display: 'flex'
+        }}
      >
        <SignAction />
      </Box>

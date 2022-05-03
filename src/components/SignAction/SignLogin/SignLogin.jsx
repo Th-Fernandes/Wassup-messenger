@@ -65,31 +65,37 @@ export default function SignLogin ({emailModal}) {
       action=""
     >
       
-      <fieldset style={{border: 'none'}} >
+      <fieldset style={{border: 'none', maxWidth: '3.5rem'}} >
         <Text 
           as='legend'
-          styleSheet={{fontSize: '6rem', fontFamily: "'Lexend Deca', sans-serif",}}
+          styleSheet={{
+            fontSize: {xs: '4rem', md: '7rem'}, 
+            fontFamily: "'Lexend Deca', sans-serif",
+            animation: '1.2s fadeIn',
+          }}
         >
           {sign === 'login' ? 'LOGIN' : 'CRIAR CONTA' }
         </Text>
 
         {authError && 
           <span 
-          style={{color: colors.primary["red-error"] , fontSize: 'clamp(12px, 14px, 16px)'}}
+          style={{color: colors.primary["red-error"] , fontSize: 'clamp(12px, 14px, 16px)', lineHeight: '1.5'}}
           >
             {authError}
           </span>}
 
 
+        <Box styleSheet={{width:  {xs: '90%', sm: '35rem'}, margin: '0 auto'}}>
         <TextField
           onChange={el => handleGetInput(el, 'email')}
           placeholder="seu email"
           type='email'
           rounded="full"
           styleSheet={{
-            width: '35rem',
+            width: '100%',  
             marginTop: '1.5rem',
-            margin: '0 auto'
+            margin: '0 auto',
+            
           }}
           value={inputData.email}
 
@@ -100,12 +106,14 @@ export default function SignLogin ({emailModal}) {
           type='password'
           rounded="full"
           styleSheet={{
-            width: '35rem',
             marginTop: '1.5rem',
             margin: '0 auto'
           }}
           value={inputData.password}
         />
+
+        </Box>
+
 
         <Button 
           buttonColors={{
@@ -122,13 +130,14 @@ export default function SignLogin ({emailModal}) {
             font: " 2rem 'Lexend Deca', sans-serif",
             display: 'block',
             maxWidth: '35rem',
-            margin: '1.5rem auto 0 '
+            margin: '1.5rem auto 0 ',
+
           }}
         />
         {
           sign == 'login'
             ? (
-              <small style={{fontSize: '1.6rem', marginTop: '1.2rem', display: 'block'}}>
+              <small style={{fontSize: ' 1.6rem', marginTop: '1.2rem', display: 'block'}}>
               Não possui conta? 
                 <span
                   onClick={() => { sign == 'login' ? setSign('signUp') : setSign('login')}} 
