@@ -1,6 +1,6 @@
 import AsideInfo from "./AsideInfo/AsideInfo"
-import SignLogin from "./SignLogin/SignLogin"
-import EmailConfirm from "../../components/SignAction/SignLogin/EmailConfirm/EmailConfirm"
+import SignLogin from "./SignTypeToggle/SignTypeToggle"
+import EmailConfirm from "./SignTypeToggle/EmailConfirm/EmailConfirm"
 import { useState } from "react"
 
 export default function SignAction() {
