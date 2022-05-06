@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../common/utils/supabaseClient";
 import { useRouter } from "next/router";
+import { supabaseAuthActions } from "../../../helpers/supabase-auth-actions";
 import { Text, Box, TextField } from "@skynexui/components"
 import colors from "../../../common/colors.json";
 import { SubmitButton } from "./SubmitButton/SubmitButton";
 import { FooterSignMessage } from "./FooterSignMessage/FooterSignMessage";
-import { Loading } from "../../Loading"
+import { Loading } from "../../Loading";
 
 
 export function SignTypeToggle({ emailModal }) {
@@ -24,33 +25,39 @@ export function SignTypeToggle({ emailModal }) {
   async function handleSignIn() {
     setOnLoading(true)
 
-    const { error: signInError } = await supabase.auth.signIn(inputData)
-    if (signInError) {
-      setAuthError(signInError.message)
-      return
-    }
-    setOnLoading(false)
-    router.push('/chat')
+    supabaseAuthActions.signIn({
+      ...inputData,
+      onError: signInErrorMessage => setAuthError(signInErrorMessage),
+      thenDo: () => {
+        router.push('/chat')
+        setOnLoading(false)
+      }
+    })
   }
 
 
   async function handleSignUp() {
     setOnLoading(true)
 
-    const { user, session, error: signUpError } = await supabase.auth.signUp(inputData)
-      if (signUpError) {
-        setAuthError(signUpError.message)
-      } else {
+    supabaseAuthActions.signUp({
+      ...inputData,
+      onError: signUpErrorMessage => setAuthError(signUpErrorMessage),
+      thenDo: () => {
         emailModal(true)
         setSign('login')
         setInputData({ email: '', password: '' })
         setOnLoading(false)
       }
+    })
+
   }
 
   useEffect(() => {
-    const session = supabase.auth.session()
-    if (session) router.push('/chat')
+    // const session = supabase.auth.session()
+    // if (session) router.push('/chat')
+    supabaseAuthActions.getSessionInfo({
+      hasSession: () => router.push('/chat')
+    })
   }, [])
 
   return (
@@ -78,9 +85,9 @@ export function SignTypeToggle({ emailModal }) {
         >
           {
             onLoading
-              ? <Loading/>
-              : sign === 'login' 
-                ? 'LOGIN' 
+              ? <Loading />
+              : sign === 'login'
+                ? 'LOGIN'
                 : 'CRIAR CONTA'
           }
         </Text>
