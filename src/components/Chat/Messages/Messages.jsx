@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../../../common/utils/supabaseClient';
-import { Box, Text, Image, TextField, Button } from '@skynexui/components';
+import { Box} from '@skynexui/components';
 import colors from "../../../common/colors.json"
 import ReceivedMessage from './ReceivedMessage/ReceivedMessage';
 import SendedMessage from './SendedMessage/SendedMessage';
@@ -24,7 +24,6 @@ export default function Messages() {
          addMessage(response.new)
         })
         .subscribe()
-
         return mySubscription
     }
 

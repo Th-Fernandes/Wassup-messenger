@@ -30,3 +30,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# dev_test_page
+/pages/__dev_tests.jsx
