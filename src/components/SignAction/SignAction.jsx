@@ -1,5 +1,5 @@
 import AsideInfo from "./AsideInfo/AsideInfo"
-import SignLogin from "./SignTypeToggle/SignTypeToggle"
+import {SignTypeToggle} from "./SignTypeToggle/SignTypeToggle"
 import EmailConfirm from "./SignTypeToggle/EmailConfirm/EmailConfirm"
 import { useState } from "react"
 
@@ -10,7 +10,7 @@ export default function SignAction() {
     <>
       {emailModal && <EmailConfirm emailModal={setEmailModal}/>}
       <AsideInfo/>
-      <SignLogin emailModal={setEmailModal} />
+      <SignTypeToggle emailModal={setEmailModal} />
     </>
   )
 }

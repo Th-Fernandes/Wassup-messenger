@@ -1,6 +1,6 @@
-import { Box, Image, Text, Button } from "@skynexui/components";
+import { Box, Text, Button } from "@skynexui/components";
 import colors from "../../../../common/colors.json"
-import emailIcon from "../../../../../public/email-icon.svg"
+import {Envelope, CircleNotch} from 'phosphor-react'
 import {useRouter} from "next/router"
 
 export default function EmailConfirm({emailModal}) {
@@ -8,6 +8,8 @@ export default function EmailConfirm({emailModal}) {
 
   return (
     <Box
+    id="emailModal"
+      onClick={(event) => { event.target.id === 'emailModal' ? emailModal(false) : ''}}
       styleSheet={{
         position: 'fixed',
         inset: 0,
@@ -21,6 +23,7 @@ export default function EmailConfirm({emailModal}) {
       }}
     >
       <Box
+        onBlur={() => emailModal(false)}
         as="article"
         styleSheet={{
           backgroundColor: colors.neutrals['black-300'],
@@ -30,37 +33,34 @@ export default function EmailConfirm({emailModal}) {
           textAlign: 'center',
         }}
       >
-        <Image
-          src={emailIcon.src}
-          styleSheet={{
-            backgroundColor: colors.neutrals['white-500'], 
-            borderRadius: '0.8rem',
-            margin: '0 auto',
-            width: '12rem',
-          }}
-        />
+        <Envelope size={96} weight="fill" />
+        
 
         <Text
           as="h2"
           styleSheet={{
-            fontFamily: "'Lexend Deca', sans-serif",
-            marginTop: '1.2rem'
+            font: " 3.2rem 'Lexend Deca', sans-serif",
+            lineHeight: '2.5rem',
+            marginBlock: '1.2rem'
           }}
         >
           Seu cadastro está quase pronto
         </Text>
 
         <Text
-        styleSheet={{fontFamily: "'Lexend Deca', sans-serif", marginBottom: '1.2rem'}}>
-          Verifique por favor seu e-mail e confirme seu cadastro para 
-          liberar o acesso a sua conta
+          styleSheet={{font: " 1.4rem'Lexend Deca', sans-serif", marginBottom: '1.2rem'}}>
+            Verifique por favor seu e-mail e confirme seu cadastro para 
+            liberar o acesso a sua conta
         </Text>
 
         <Button
+          buttonColors={{
+            mainColor: colors.primary.purple
+          }}
           label="voltar ao menu principal"
           onClick={() => {
             emailModal(false)
-            router.push('/')
+            //router.push('/')
           }}
         />
       </Box>

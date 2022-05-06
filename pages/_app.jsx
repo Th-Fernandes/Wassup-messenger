@@ -1,4 +1,5 @@
 import "../src/common/styles/global.css"
+import wassupLogo from "../public/wassup-logo.svg"
 import Head from "next/head"
 
 function Test(){
@@ -15,6 +16,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
     <Head>
+    <link rel="icon" type="image/svg" href={wassupLogo.src} />
       <title>Wassup messenger</title>
     </Head>
       <Test />

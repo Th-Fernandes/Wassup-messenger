@@ -1,11 +1,9 @@
-import {useState} from 'react'
 import { Box, Image, TextField } from '@skynexui/components';
-import sendIcon from "../../../../public/send-message.svg";
+import {PaperPlaneRight,SmileySticker} from 'phosphor-react'
+
 
 export function SendMessageForm({onSendMessage, onWriteMessage, writtenMessage}) {
   
-  
-
   function handleInputValue(element) {
     const inputValue = element.target.value
     console.log(inputValue)
@@ -17,8 +15,6 @@ export function SendMessageForm({onSendMessage, onWriteMessage, writtenMessage})
     if(writtenMessage) onSendMessage(test => !test)
   }
 
-
-
   return (
     <Box
       as='form'
@@ -28,7 +24,7 @@ export function SendMessageForm({onSendMessage, onWriteMessage, writtenMessage})
       }}
       styleSheet={{
         position: 'relative',
-        top: '-70px',
+        top: '-85px',
         zIndex: 999,
         display: 'flex',
         justifyContent: 'center',
@@ -46,7 +42,7 @@ export function SendMessageForm({onSendMessage, onWriteMessage, writtenMessage})
         rounded='full'
         value={writtenMessage}
         styleSheet={{
-          width: '90%',
+          width: '85%',
           minHeight: '100%',
           maxHeight: '50rem',
           overflowY: 'auto',
@@ -55,11 +51,12 @@ export function SendMessageForm({onSendMessage, onWriteMessage, writtenMessage})
         autoComplete="off"
       />
 
-      <button style={{ marginTop: '-0.5rem' }}>
-        <Image
-          src={sendIcon.src}
-          styleSheet={{ cursor: 'pointer' }}
-        />
+      <button style={{ marginTop: '-0.5rem', padding: '0.5rem', borderRadius: '50%' }}>
+        <SmileySticker size={50}  weight="fill" />
+      </button>
+
+      <button style={{ marginTop: '-0.5rem', padding: '0.5rem',borderRadius: '50%' }}>
+        <PaperPlaneRight size={50} weight="fill" />
       </button>
     </Box>
   )

@@ -15,9 +15,10 @@ export default function SendedMessage({messageData}) {
         styleSheet={{
           backgroundColor: colors.primary['purple'],
           maxWidth: '50rem',
-          padding: '1.6rem 0.8rem',
+          padding: '1.6rem 1.2rem',
           borderRadius: '1.6rem 1.6rem  0 1.6rem',
-          wordBreak: 'break-all'
+          wordBreak: 'break-all',
+          fontSize: '1.4rem'
         }}
       >
         {messageData.message}

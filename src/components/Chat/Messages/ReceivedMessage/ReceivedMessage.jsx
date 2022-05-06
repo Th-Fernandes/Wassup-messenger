@@ -1,6 +1,6 @@
-import { Box, Image, } from '@skynexui/components';
-import unknownIcon from "../../../../../public/unknown-user.jpg"
+import { Box } from '@skynexui/components';
 import colors from "../../../../common/colors.json"
+import {UserCircle} from 'phosphor-react'
 
 export default function ReceivedMessage({messageData}) {
 
@@ -20,9 +20,10 @@ export default function ReceivedMessage({messageData}) {
         styleSheet={{
           backgroundColor: colors.neutrals['black-200'],
           maxWidth: '50rem',
-          padding: '1.6rem 0.8rem',
+          padding: '1.6rem 1.2rem',
           borderRadius: '1.6rem 1.6rem 1.6rem 0',
-          wordBreak: 'break-all'
+          wordBreak: 'break-all',
+          fontSize: '1.4rem'
         }}
       >
         {messageData.message}
@@ -34,16 +35,10 @@ export default function ReceivedMessage({messageData}) {
           width: '100%'
         }}
       >
-        <Image
-          src={unknownIcon.src}
-          styleSheet={{ width: '2.5rem' }}
-        />
+        <UserCircle size={26}  weight="fill" />
         <span style={{ marginLeft: '0.5rem' }}>{messageData.username}</span>
         <span style={{ marginLeft: '0.5rem', color: colors.neutrals['white-500'] }}>
-          {
-            handleMessageTime(messageData.created_at)
-            
-          }
+          { handleMessageTime(messageData.created_at) }
         </span>
 
       </Box>

@@ -1,5 +1,5 @@
-import wassupIcon from '../../../../public/wassup-icon.png';
-import { Box, Image, Text } from '@skynexui/components';
+import {ChatsCircle} from "phosphor-react" 
+import { Box,  Text } from '@skynexui/components';
 import colors from "../../../common/colors.json";
 
 
@@ -18,14 +18,7 @@ export default function AsideInfo() {
         height: '100%'
       }}
     >
-      <Image 
-        styleSheet={{
-          width: '15rem',
-          margin: '0 auto 2rem '
-        }}
-        src={wassupIcon.src} 
-        alt="ícone do wassup messenger na cor roxa" 
-      />
+      <ChatsCircle size={96} color="#A225DB" weight="fill" />
       <article>
         <Text
           as='h2'

@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../common/utils/supabaseClient";
 import { useRouter } from "next/router";
-import { Text, Box, TextField} from "@skynexui/components"
+import { Text, Box, TextField } from "@skynexui/components"
 import colors from "../../../common/colors.json";
 import { SubmitButton } from "./SubmitButton/SubmitButton";
 import { FooterSignMessage } from "./FooterSignMessage/FooterSignMessage";
+import { Loading } from "../../Loading"
 
 
-export default function SignLogin({ emailModal }) {
+export function SignTypeToggle({ emailModal }) {
   const [sign, setSign] = useState('login')
   const [inputData, setInputData] = useState({ email: '', password: '', username: '' })
+  const [onLoading, setOnLoading] = useState(false)
   const [authError, setAuthError] = useState(null)
   const router = useRouter()
 
@@ -20,26 +22,32 @@ export default function SignLogin({ emailModal }) {
   }
 
   async function handleSignIn() {
+    setOnLoading(true)
+
     const { error: signInError } = await supabase.auth.signIn(inputData)
     if (signInError) {
       setAuthError(signInError.message)
       return
     }
+    setOnLoading(false)
     router.push('/chat')
   }
 
 
   async function handleSignUp() {
+    setOnLoading(true)
+
     const { user, session, error: signUpError } = await supabase.auth.signUp(inputData)
-    if (signUpError) {
-      setAuthError(signUpError.message)
-    } else {
-      emailModal(true)
-      setSign('login')
-      setInputData({ email: '', password: '' })
-    }
+      if (signUpError) {
+        setAuthError(signUpError.message)
+      } else {
+        emailModal(true)
+        setSign('login')
+        setInputData({ email: '', password: '' })
+        setOnLoading(false)
+      }
   }
-  
+
   useEffect(() => {
     const session = supabase.auth.session()
     if (session) router.push('/chat')
@@ -68,7 +76,13 @@ export default function SignLogin({ emailModal }) {
             animation: '1.2s fadeIn',
           }}
         >
-          {sign === 'login' ? 'LOGIN' : 'CRIAR CONTA'}
+          {
+            onLoading
+              ? <Loading/>
+              : sign === 'login' 
+                ? 'LOGIN' 
+                : 'CRIAR CONTA'
+          }
         </Text>
 
         {authError &&
@@ -77,7 +91,6 @@ export default function SignLogin({ emailModal }) {
           >
             {authError}
           </span>}
-
 
         <Box styleSheet={{ width: { xs: '90%', sm: '35rem' }, margin: '0 auto' }}>
           {
@@ -96,6 +109,7 @@ export default function SignLogin({ emailModal }) {
               value={inputData.username}
             />
           }
+
 
           <TextField
             onChange={el => handleGetInput(el, 'email')}
@@ -122,24 +136,26 @@ export default function SignLogin({ emailModal }) {
             value={inputData.password}
           />
 
+
+
         </Box>
 
-        <SubmitButton/>
+        <SubmitButton />
 
         {
           sign == 'login'
-            ? 
-              <FooterSignMessage
-                variant='loginVariant'
-                changeSignType={setSign}
-                selectedSignType={sign}
-              />
-            : 
-              <FooterSignMessage
-                variant='signUpVariant'
-                changeSignType={setSign}
-                selectedSignType={sign}
-              />   
+            ?
+            <FooterSignMessage
+              variant='loginVariant'
+              changeSignType={setSign}
+              selectedSignType={sign}
+            />
+            :
+            <FooterSignMessage
+              variant='signUpVariant'
+              changeSignType={setSign}
+              selectedSignType={sign}
+            />
         }
       </fieldset>
     </Box>
