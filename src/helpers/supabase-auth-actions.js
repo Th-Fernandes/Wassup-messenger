@@ -30,11 +30,17 @@ export const supabaseAuthActions = {
 
   },
 
+  async signOut({onError, thenDo}) {
+    const { error } = await supabase.auth.signOut()
+
+    !error ? thenDo() : onError(error.message)
+  },
+
   async getSessionInfo({hasSession, hasNotSession}) {
     const session = supabase.auth.session()
 
-    if(session) {
-      hasSession(session)
+    if(session ) {
+      hasSession ? hasSession(session) : null
     } else {
       hasNotSession ? hasNotSession() : null
     }

@@ -1,9 +1,9 @@
-import {ChatsCircle} from "phosphor-react" 
+import { ChatsCircle } from "phosphor-react" 
 import { Box,  Text } from '@skynexui/components';
 import colors from "../../../common/colors.json";
 
 
-export default function AsideInfo() {
+export function AsideInfo() {
   return (
     <Box
       styleSheet={{

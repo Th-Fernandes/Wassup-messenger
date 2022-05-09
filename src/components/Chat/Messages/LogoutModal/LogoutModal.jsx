@@ -1,5 +1,5 @@
-import { DefaultModal } from '../../../../components/DefaultModal/DefaultModal';
-import { Box, Text, Button } from '@skynexui/components';
+import { DefaultModal } from '../../../DefaultModal/DefaultModal';
+import { Box, Button } from '@skynexui/components';
 import colors from "../../../../common/colors.json"
 import {useState} from 'react'
 

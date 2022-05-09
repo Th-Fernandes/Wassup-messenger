@@ -3,7 +3,7 @@ import colors from "../../../../common/colors.json"
 import {Envelope, CircleNotch} from 'phosphor-react'
 import {useRouter} from "next/router"
 
-export default function EmailConfirm({emailModal}) {
+export function EmailConfirm({emailModal}) {
   const router = useRouter()
 
   return (

@@ -1,9 +1,9 @@
-import AsideInfo from "./AsideInfo/AsideInfo"
-import {SignTypeToggle} from "./SignTypeToggle/SignTypeToggle"
-import EmailConfirm from "./SignTypeToggle/EmailConfirm/EmailConfirm"
 import { useState } from "react"
+import { AsideInfo } from "./AsideInfo"
+import { SignTypeToggle } from "./SignTypeToggle"
+import { EmailConfirm } from "./SignTypeToggle/EmailConfirm"
 
-export default function SignAction() {
+export function SignAction() {
   const [emailModal, setEmailModal] = useState(false)
 
   return (

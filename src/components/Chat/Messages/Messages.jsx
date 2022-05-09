@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../../../common/utils/supabaseClient';
+import {supabaseAuthActions} from "../../../helpers/supabase-auth-actions";
 import { supabaseDatabaseActions } from '../../../helpers/supabase-database-actions';
+import colors from "../../../common/colors.json";
+
 import { Box} from '@skynexui/components';
-import colors from "../../../common/colors.json"
 import ReceivedMessage from './ReceivedMessage/ReceivedMessage';
 import SendedMessage from './SendedMessage/SendedMessage';
 import { SendMessageForm } from './SendMessageForm';
@@ -30,8 +32,8 @@ export default function Messages() {
       supabaseDatabaseActions.insert({
         inTable: 'messages',
         createRow: [{ 
-          username: 'jato', message: 
-          inputMessage, 
+          username: 'jato', 
+          message: inputMessage, 
           session_id: sessionId
         }],
         thenDo: () => setInputMessage('')
@@ -46,25 +48,16 @@ export default function Messages() {
       inTable: 'messages',
       thenDo: (data) => setMessages(data)  
     })
-
-
-  //  const scrollChatToBottom = () => {
-  //     setTimeout(() => {
-  //       const chat = document.querySelector("#chatBox")
-  //       window.document.querySelector('#chatBox').scrollTo(0, chat.scrollHeight) 
-  //     }, 200)
-  //  }
-
-  //  scrollChatToBottom()
-
    }, [onSendMessage])
 
 
 
   useEffect(() => {
-    const session = supabase.auth.session()
-    session ? setSessionId(session.user.id) : console.error('não foi possível pegar os dados da sessão.')
-   }, [])
+    supabaseAuthActions.getSessionInfo({
+      hasSession: session => setSessionId(session.user.id),
+      hasNotSession: () => { throw new Error('não foi possível pegar os dados da sessão.') }
+    })
+  }, [])
 
 
   return (

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../../../common/utils/supabaseClient";
 import { useRouter } from "next/router";
 import { supabaseAuthActions } from "../../../helpers/supabase-auth-actions";
-import { Text, Box, TextField } from "@skynexui/components"
 import colors from "../../../common/colors.json";
-import { SubmitButton } from "./SubmitButton/SubmitButton";
-import { FooterSignMessage } from "./FooterSignMessage/FooterSignMessage";
+
+import { Text, Box, TextField } from "@skynexui/components"
+import { SubmitButton } from "./SubmitButton";
+import { FooterSignMessage } from "./FooterSignMessage";
 import { Loading } from "../../Loading";
 
 
@@ -15,7 +15,6 @@ export function SignTypeToggle({ emailModal }) {
   const [onLoading, setOnLoading] = useState(false)
   const [authError, setAuthError] = useState(null)
   const router = useRouter()
-
 
   function handleGetInput(input, dataType) {
     const userData = input.target.value
@@ -53,8 +52,6 @@ export function SignTypeToggle({ emailModal }) {
   }
 
   useEffect(() => {
-    // const session = supabase.auth.session()
-    // if (session) router.push('/chat')
     supabaseAuthActions.getSessionInfo({
       hasSession: () => router.push('/chat')
     })
@@ -142,9 +139,6 @@ export function SignTypeToggle({ emailModal }) {
             }}
             value={inputData.password}
           />
-
-
-
         </Box>
 
         <SubmitButton />
