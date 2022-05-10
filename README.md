@@ -32,6 +32,7 @@ Basta entrar nessa [url](https://https://wassup-messenger.vercel.app/), criar su
 
 - Next.js
 - supabase (database e realTime)
+- Phosphor
 
 # Autor
 

@@ -33,3 +33,5 @@ yarn-error.log*
 
 # dev_test_page
 /pages/__dev_tests.jsx
+# vs code configs
+/.vscode

@@ -1,8 +1,49 @@
-import { DefaultModal } from "../DefaultModal";
-import { Box, Button } from '@skynexui/components';
+import { useEffect, useState } from "react";
+import { supabaseAuthActions} from "../../../helpers/supabase-auth-actions";
+import { supabaseDatabaseActions } from "../../../helpers/supabase-database-actions";
+import { useRouter } from "next/router";
 import colors from "../../../common/colors.json";
 
-export function LogoutModal({ signOut, closeModal }) {
+import { DefaultModal } from "../DefaultModal";
+import { Box, Button } from '@skynexui/components';
+
+export function LogoutModal({ closeLogoutModal, isSigningOut, signOutState }) {
+  const [sessionId, setSessionId] = useState()
+  const [userData, setUserData] = useState()
+  const router = useRouter()
+
+  function handleSignOut() {
+    supabaseAuthActions.signOut({
+      onError: errorMessage => console.error(errorMessage),
+      thenDo: () => {
+        isSigningOut(true)
+        router.push('/')
+      }
+    })
+  } 
+
+  useEffect(() => {
+    const getSessionId = supabaseAuthActions.getSessionInfo({
+      hasSession: session => {
+        setSessionId(session.user.id)
+        setUserData(session.user.user_metadata)
+        console.log(session.user.user_metadata)
+      },
+      hasNotSession: () => console.log('deu rim :(((')
+    })
+  }, [])
+
+  useEffect(() => {
+    console.log(sessionId)
+    if(signOutState) {
+      const insertGetOutMessage = supabaseDatabaseActions.insert({
+        inTable: 'messages',
+        createRow: [{username: userData.username , message: null, session_id: sessionId}],
+        thenDo: (data) => console.log('worked a lot')
+      })
+    }
+  }, [signOutState])
+
   return (
     <DefaultModal>
       <Box styleSheet={{ textAlign: 'center' }}>
@@ -16,7 +57,7 @@ export function LogoutModal({ signOut, closeModal }) {
                 contrastColor: '#ffffff',
               }}
               label='cancelar'
-              onClick={() => closeModal()}
+              onClick={() => closeLogoutModal()}
               styleSheet={{
                 backgroundColor: colors.neutrals['white-100'],
                 color: colors.neutrals['black-500'],
@@ -29,7 +70,7 @@ export function LogoutModal({ signOut, closeModal }) {
           <li>
             <Button
               label='sair'
-              onClick={() => signOut()}
+              onClick={() => handleSignOut()}
               styleSheet={{ width: '10rem', fontWeight: 'bold' }}
             />
           </li>

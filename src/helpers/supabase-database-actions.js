@@ -7,7 +7,7 @@ export const supabaseDatabaseActions = {
       .insert(createRow)
 
       if(error) throw new Error(`não foi possível enviar a requisição ao banco de dados: ${error.message}`)
-      thenDo(data)
+      thenDo ? thenDo(data) : null
   },
   async readAll({inTable, thenDo}) {
     const { data, error } = await supabase
@@ -17,8 +17,7 @@ export const supabaseDatabaseActions = {
 
     console.log(data)  
     if(error) throw new Error(`não foi possível receber a respostar do banco de dados: ${error.message}`)
-
-    thenDo(data)
+    thenDo ? thenDo(data) : null
   }
 }
 
