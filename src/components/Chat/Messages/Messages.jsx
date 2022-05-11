@@ -97,13 +97,8 @@ export default function Messages({ }) {
                     : <ReceivedMessage messageData={data} key={index + '-RC'} />
                 )
                 : <LogOutMessage username={data.username} />
-
-
             ))
           }
-
-
-
         </Box>
       </Box>
 

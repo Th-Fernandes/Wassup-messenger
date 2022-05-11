@@ -1,4 +1,5 @@
-import { supabase } from "../common/utils/supabaseClient"
+import { supabase } from "../common/utils/supabaseClient";
+import {supabaseDatabaseActions} from "./supabase-database-actions"
 
 export const supabaseAuthActions = {
   async signIn({email, password, onError, thenDo}) {
@@ -12,10 +13,10 @@ export const supabaseAuthActions = {
       throw new Error(`não foi possível realizar login. ${signInError.message}`) 
     }
 
-    thenDo(signInError)
+    thenDo()
   },
 
-  async signUp({email, password, onError, thenDo}) {
+  async signUp({email, password, username, onError, thenDo}) {
     const { user, session, error: signUpError } = await supabase.auth.signUp({
       email,
       password,
@@ -26,7 +27,20 @@ export const supabaseAuthActions = {
       throw new Error(`não foi possível realizar cadastro. ${signUpError.message}`) 
     }
 
-    thenDo(signUpError)
+    function sendTemporaryData() {
+      supabaseDatabaseActions.insert({
+        inTable: 'temporary_user_data',
+        createRow: [{
+          email,
+          password,
+          username,
+          session_id: user.id // POSSIVELMENTE N VAI COINCIDIR COM O AUTH.SESSION.USER.ID, FIQUE DE OLHO!!!!
+        }]
+      })
+    }
+
+    sendTemporaryData()
+    thenDo ? thenDo() : null
 
   },
 
@@ -44,5 +58,11 @@ export const supabaseAuthActions = {
     } else {
       hasNotSession ? hasNotSession() : null
     }
+  },
+
+  async updateUserInfo({update, onError}) {
+    const { user, error } = await supabase.auth.update(update)
+
+    if(error) onError ? onError() : null
   }
 }

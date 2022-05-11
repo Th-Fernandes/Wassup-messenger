@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { supabaseDatabaseActions } from "../../../helpers/supabase-database-actions";
 import { supabaseAuthActions } from "../../../helpers/supabase-auth-actions";
 import colors from "../../../common/colors.json";
 
@@ -7,6 +8,7 @@ import { Text, Box, TextField } from "@skynexui/components"
 import { SubmitButton } from "./SubmitButton";
 import { FooterSignMessage } from "./FooterSignMessage";
 import { Loading } from "../../Loading";
+
 
 
 export function SignTypeToggle({ emailModal }) {
@@ -30,8 +32,36 @@ export function SignTypeToggle({ emailModal }) {
       thenDo: () => {
         router.push('/chat')
         setOnLoading(false)
+        
+        supabaseAuthActions.getSessionInfo({
+          hasSession: session => {
+            const hasUserUsername = !session.user.user_metadata.username ? false : true
+            
+            if(!hasUserUsername) {
+              supabaseDatabaseActions.readAll({
+                inTable: 'temporary_user_data',
+                thenDo: (data) => {
+                  data.map(userData => {
+                    if(userData.email === inputData.email) {
+                      supabaseAuthActions.updateUserInfo({
+                        update: {data: {username: userData.username}}
+                      })
+
+                      supabaseDatabaseActions.delete({
+                        inTable: 'temporary_user_data',
+                        match: {email: userData.email}
+                      })
+                    }
+                  })
+                }
+              })
+            } else {console.log('username: ', session.user.user_metadata.username )}
+          }
+        })
       }
     })
+
+    setOnLoading(false)
   }
 
 

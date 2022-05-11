@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { supabaseAuthActions } from "../src/helpers/supabase-auth-actions";
-import { supabaseDatabaseActions } from "../src/helpers/supabase-Database-actions";
 import {useState} from "react";
 
 import { Box } from '@skynexui/components';

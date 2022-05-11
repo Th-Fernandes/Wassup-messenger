@@ -17,7 +17,7 @@
 - autenticações através do e-mail. 
 
  <p align="center">
-  <img src="./public/chat-desmonstration.png"/>
+  <img src="./public/chat-demonstration.png"/>
 </p>
 
 # Como utilizar?
