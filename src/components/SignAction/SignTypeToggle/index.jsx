@@ -9,13 +9,25 @@ import { SubmitButton } from "./SubmitButton";
 import { FooterSignMessage } from "./FooterSignMessage";
 import { Loading } from "../../Loading";
 
+/*
+  entendendo o problema:
+  - a função de signIn está fazendo muitas funcionalidades, como:
+    * getsessioninfo
+    * fetch no temporary_user_data
+    * filtra o email atual e compara com os do database
+    * exclui os dados temporários   
+*/
 
+/*
+  
+*/
 
 export function SignTypeToggle({ emailModal }) {
   const [sign, setSign] = useState('login')
   const [inputData, setInputData] = useState({ email: '', password: '', username: '' })
   const [onLoading, setOnLoading] = useState(false)
   const [authError, setAuthError] = useState(null)
+  const [hasSession, setHasSession] = useState(false)
   const router = useRouter()
 
   function handleGetInput(input, dataType) {
@@ -32,32 +44,8 @@ export function SignTypeToggle({ emailModal }) {
       thenDo: () => {
         router.push('/chat')
         setOnLoading(false)
+        setHasSession(true)
         
-        supabaseAuthActions.getSessionInfo({
-          hasSession: session => {
-            const hasUserUsername = !session.user.user_metadata.username ? false : true
-            
-            if(!hasUserUsername) {
-              supabaseDatabaseActions.readAll({
-                inTable: 'temporary_user_data',
-                thenDo: (data) => {
-                  data.map(userData => {
-                    if(userData.email === inputData.email) {
-                      supabaseAuthActions.updateUserInfo({
-                        update: {data: {username: userData.username}}
-                      })
-
-                      supabaseDatabaseActions.delete({
-                        inTable: 'temporary_user_data',
-                        match: {email: userData.email}
-                      })
-                    }
-                  })
-                }
-              })
-            } else {console.log('username: ', session.user.user_metadata.username )}
-          }
-        })
       }
     })
 
@@ -83,9 +71,39 @@ export function SignTypeToggle({ emailModal }) {
 
   useEffect(() => {
     supabaseAuthActions.getSessionInfo({
-      hasSession: () => router.push('/chat')
+      hasSession: (session) =>  {
+        const hasUserUsername = !session.user.user_metadata.username ? false : true
+
+        function getTemporaryData() {
+          supabaseDatabaseActions.readAll({
+            inTable: 'temporary_user_data',
+            thenDo: (data) => {}
+            
+          })
+      }
+
+        if(!hasUserUsername) {
+          supabaseDatabaseActions.readAll({
+            inTable: 'temporary_user_data',
+            thenDo: (data) => {
+              data.map(userData => {
+                if(userData.email === inputData.email) {
+                  supabaseAuthActions.updateUserInfo({
+                    update: {data: {username: userData.username}}
+                  })
+
+                  supabaseDatabaseActions.delete({
+                    inTable: 'temporary_user_data',
+                    match: {email: userData.email}
+                  })
+                }
+              })
+            }
+          })
+        } else {console.log('username: ', session.user.user_metadata.username )}
+      }
     })
-  }, [])
+  }, [hasSession])
 
   return (
     <Box

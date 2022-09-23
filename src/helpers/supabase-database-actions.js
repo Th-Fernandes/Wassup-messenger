@@ -16,9 +16,11 @@ export const supabaseDatabaseActions = {
       .select('*')
       .order('id', { ascending: true })
 
-    console.log(data)
+    // console.log(data)
     if (error) throw new Error(`não foi possível receber a resposta do banco de dados: ${error.message}`)
     thenDo ? thenDo(data) : null
+
+    return data
   },
 
   async update({ inTable, updateRow, match, thenDo }) {
