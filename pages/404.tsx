@@ -1,7 +1,6 @@
 import {Box} from "@skynexui/components"
 import { useRouter} from "next/router"
 
-
 export default function error404() {
   const router = useRouter()
 

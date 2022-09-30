@@ -35,3 +35,6 @@ yarn-error.log*
 /pages/__dev_tests.jsx
 # vs code configs
 /.vscode
+
+# TS
+next-env.d.ts

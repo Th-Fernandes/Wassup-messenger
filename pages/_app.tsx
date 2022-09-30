@@ -6,7 +6,7 @@ function Test(){
   return(
     <style  global jsx>{`
     body {
-      font-family: 'Lexend Deca', sans-serif;
+      font-family: 'Roboto', sans-serif;
     }
     `}</style>
   )
