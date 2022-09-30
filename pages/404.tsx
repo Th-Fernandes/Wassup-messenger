@@ -1,8 +1,8 @@
-import {Box} from "@skynexui/components"
-import { useRouter} from "next/router"
+import {Box} from "@skynexui/components";
+import { useRouter} from "next/router";
 
-export default function error404() {
-  const router = useRouter()
+export default function Error404() {
+  const router = useRouter();
 
   return (
     <Box  
@@ -30,5 +30,5 @@ export default function error404() {
         </button>
 
     </Box>
-  )
+  );
 }

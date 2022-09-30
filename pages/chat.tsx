@@ -4,19 +4,19 @@ import { supabaseAuthActions } from "../src/helpers/supabase-auth-actions";
 import {useState} from "react";
 
 import { Box } from '@skynexui/components';
-import { defaultSection } from "../src/common/styles/defaultSection"
+import { defaultSection } from "../src/common/styles/defaultSection";
 import { Chat } from "../src/components/Chat/index.jsx";
-import { LogoutModal } from "../src/components/DefaultModal/LogoutModal"
+import { LogoutModal } from "../src/components/DefaultModal/LogoutModal";
 
 
 export default function Home() {
-  const [isLogoutModalOpened, setIsLogoutModalOpened] = useState(false)
-  const [isSigningOut, setIsSigningOut] = useState(false)
-  const [sessionId, setSessionId] = useState('')
-  const router = useRouter()
+  const [isLogoutModalOpened, setIsLogoutModalOpened] = useState(false);
+  const [isSigningOut, setIsSigningOut] = useState(false);
+  const [sessionId, setSessionId] = useState('');
+  const router = useRouter();
 
   function handleToggleModalState() {
-    setIsLogoutModalOpened(actualState => !actualState)
+    setIsLogoutModalOpened(actualState => !actualState);
   }
 
   useEffect(() => {
