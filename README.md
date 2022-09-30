@@ -1,40 +1,42 @@
-<p align="center">
-  <img src="./public/wassup-logo.svg" width="140px" />
+<h1 align="center">
+  <img src="./src/assets/images/readme-banner.png" />
+</h1>
+
+<h2> O que é esse projeto? </h2>
+
+<p> 
+  Wassup Messenger é um mensageiro multiplataforma (mobile e web). Através dele
+  é possível se conectar ao chat da plataforma e conversar com os usuários da
+  plataforma, basta apenas possuir uma conta. Confira a versão mobile <a href="https://github.com/Th-Fernandes/Wassup-messenger-mobile">aqui</a>
 </p>
-<h1 align="center">Wassup Messenger</h1>
-<p align="center">Um mensageiro para a web.</p>
-
-
-
-<h3 align="center"> 
-  <img  height="25px" alt="progress" src="https://img.shields.io/badge/STATUS-em%20desenvolvimento-%236636f1?style=for-the-badge" />
-  <a href="https://www.instagram.com/thiagofernades77/"><img height="25px" alt="me siga no instagram:" src="https://img.shields.io/badge/Follow%20@thiagofernandes77-%3C%3C%20on%20instagram-%236636f1?style=for-the-badge" /></a>
-</h3>
-
-# O que é esse projeto?
-
-- Wassup Messenger é um mensageiro para a web, em tempo real e  responsivo.
-- autenticações através do e-mail. 
-
- <p align="center">
-  <img src="./public/chat-demonstration.png"/>
-</p>
-
-# Como utilizar?
-
-Basta entrar nessa [url](https://https://wassup-messenger.vercel.app/), criar sua conta, confirmá-la através do e-mail e pronto! Após essa etapa, você será redirecionado ao chat.
 
 <p align="center">
-  <img src="./public/login-demonstration.PNG"/>
+  <img src="./src/assets/images/readme-demonstration.png" />
 </p>
 
-# Tecnologias e ferramentas utilizadas
+<div>
+  <h2>Ferramentas utilizadas (versão Web)</h2>
+  <ul>
+    <li>Next.js</li>
+    <li>Typescript</li>
+    <li>Tailwind</li>
+    <li>Supabase</li>
+    <li>Phosphor</li>
+  </ul>
+</div>
 
-- Next.js
-- supabase (database e realTime)
-- Phosphor
+<div>
+  <h2>Como utilizar</h2>
+  <ol>
+    <li>Cadastre seu e-mail</li>
+    <li>Confirme seu cadastro com e-mail que será enviado ao mesmo</li>
+    <li>Envie e receba mensagens em tempo real de outros usuários</li>
+  </ol>
+</div>
 
-# Autor
+## Autor
 
-- LinkedIn: [@thiago-fernandes-front](https://https://www.linkedin.com/in/thiago-fernandes-front/)
-- Instagram: [@thiagofernandes77](https://www.instagram.com/thiagofernades77/) (com conteúdos de programação)
+
+[![LinkedIn Badge](https://img.shields.io/badge/-@thiagofernandes.dev-FF084A?style=flat-square&labelColor=FF084A&logo=instagram&logoColor=white&link=https://www.linkedin.com/in/thiago-fernandes-front/)](https://www.linkedin.com/in/thiago-fernandes-front/)
+[![Instagram Badge](https://img.shields.io/badge/-@thiagofernandes.dev-FF084A?style=flat-square&labelColor=FF084A&logo=instagram&logoColor=white&link=https://www.instagram.com/thiagofernades.dev/)](https://www.instagram.com/thiagofernades.dev/)
+[![Gmail Badge](https://img.shields.io/badge/-thiagojfcarvalho@gmail.com-FF084A?style=flat-square&labelColor=FF084A&logo=gmail&logoColor=white&link=https://www.instagram.com/thiagofernades.dev/)](https://www.instagram.com/thiagofernades.dev/)
