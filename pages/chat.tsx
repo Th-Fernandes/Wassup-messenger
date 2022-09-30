@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { supabaseAuthActions } from "../src/helpers/supabase-auth-actions";
 import {useState} from "react";
 
-import { Box } from '@skynexui/components';
+import { Box } from "@skynexui/components";
 import { defaultSection } from "../src/common/styles/defaultSection";
 import { Chat } from "../src/components/Chat/index.jsx";
 import { LogoutModal } from "../src/components/DefaultModal/LogoutModal";
@@ -12,7 +12,7 @@ import { LogoutModal } from "../src/components/DefaultModal/LogoutModal";
 export default function Home() {
   const [isLogoutModalOpened, setIsLogoutModalOpened] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
-  const [sessionId, setSessionId] = useState('');
+  // const [sessionId, setSessionId] = useState("");
   const router = useRouter();
 
   function handleToggleModalState() {
@@ -20,12 +20,12 @@ export default function Home() {
   }
 
   useEffect(() => {
-    const redirectBySession = supabaseAuthActions.getSessionInfo({
-      hasSession: (session) => setSessionId(session.user.id),
-      hasNotSession: () => router.push('/')
-    })
+    supabaseAuthActions.getSessionInfo({
+      hasSession: () => {},
+      hasNotSession: () => router.push("/")
+    });
 
-  }, [])
+  }, []);
 
   return (
     <main>
@@ -47,5 +47,5 @@ export default function Home() {
         }
       </Box>
     </main>
-  )
+  );
 }
