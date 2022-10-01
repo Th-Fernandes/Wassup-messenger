@@ -1,161 +1,150 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { supabaseDatabaseActions } from "../../../helpers/supabase-database-actions";
-import { supabaseAuthActions } from "../../../helpers/supabase-auth-actions";
-import colors from "../../../common/colors.json";
+import { supabaseDatabaseActions } from "helpers/supabase-database-actions";
+import { supabaseAuthActions } from "helpers/supabase-auth-actions";
+import colors from "common/colors.json";
 
-import { Text, Box, TextField } from "@skynexui/components"
+import { Text, Box, TextField } from "@skynexui/components";
 import { SubmitButton } from "./SubmitButton";
 import { FooterSignMessage } from "./FooterSignMessage";
-import { Loading } from "../../Loading";
+import { Loading } from ".";
+import PropTypes from "prop-types";
 
-/*
-  entendendo o problema:
-  - a função de signIn está fazendo muitas funcionalidades, como:
-    * getsessioninfo
-    * fetch no temporary_user_data
-    * filtra o email atual e compara com os do database
-    * exclui os dados temporários   
-*/
-
-/*
-  
-*/
+SignTypeToggle.propTypes = {
+  emailModal: PropTypes.func
+};
 
 export function SignTypeToggle({ emailModal }) {
-  const [sign, setSign] = useState('login')
-  const [inputData, setInputData] = useState({ email: '', password: '', username: '' })
-  const [onLoading, setOnLoading] = useState(false)
-  const [authError, setAuthError] = useState(null)
-  const [hasSession, setHasSession] = useState(false)
-  const router = useRouter()
+  const [sign, setSign] = useState("login");
+  const [inputData, setInputData] = useState({ email: "", password: "", username: "" });
+  const [onLoading, setOnLoading] = useState(false);
+  const [authError, setAuthError] = useState(null);
+  const [hasSession, setHasSession] = useState(false);
+  const router = useRouter();
 
   function handleGetInput(input, dataType) {
-    const userData = input.target.value
-    setInputData(latestState => ({ ...latestState, [dataType]: userData }))
+    const userData = input.target.value;
+    setInputData(latestState => ({ ...latestState, [dataType]: userData }));
   }
 
   async function handleSignIn() {
-    setOnLoading(true)
+    setOnLoading(true);
 
     supabaseAuthActions.signIn({
       ...inputData,
       onError: signInErrorMessage => setAuthError(signInErrorMessage),
       thenDo: () => {
-        router.push('/chat')
-        setOnLoading(false)
-        setHasSession(true)
-        
-      }
-    })
+        router.push("/chat");
+        setOnLoading(false);
+        setHasSession(true);
 
-    setOnLoading(false)
+      }
+    });
+
+    setOnLoading(false);
   }
 
 
   async function handleSignUp() {
-    setOnLoading(true)
+    setOnLoading(true);
 
     supabaseAuthActions.signUp({
       ...inputData,
       onError: signUpErrorMessage => setAuthError(signUpErrorMessage),
       thenDo: () => {
-        emailModal(true)
-        setSign('login')
-        setInputData({ email: '', password: '' })
-        setOnLoading(false)
+        emailModal(true);
+        setSign("login");
+        setInputData({ email: "", password: "" });
+        setOnLoading(false);
       }
-    })
-
+    });
   }
 
   useEffect(() => {
     supabaseAuthActions.getSessionInfo({
-      hasSession: (session) =>  {
-        const hasUserUsername = !session.user.user_metadata.username ? false : true
+      hasSession: (session) => {
+        const hasUserUsername = !session.user.user_metadata.username ? false : true;
+        // function getTemporaryData() {
+        //   supabaseDatabaseActions.readAll({
+        //     inTable: "temporary_user_data",
+        //     thenDo: (data) => { }
 
-        function getTemporaryData() {
+        //   })
+        // }
+        if (!hasUserUsername) {
           supabaseDatabaseActions.readAll({
-            inTable: 'temporary_user_data',
-            thenDo: (data) => {}
-            
-          })
-      }
-
-        if(!hasUserUsername) {
-          supabaseDatabaseActions.readAll({
-            inTable: 'temporary_user_data',
+            inTable: "temporary_user_data",
             thenDo: (data) => {
               data.map(userData => {
-                if(userData.email === inputData.email) {
+                if (userData.email === inputData.email) {
                   supabaseAuthActions.updateUserInfo({
-                    update: {data: {username: userData.username}}
-                  })
+                    update: { data: { username: userData.username } }
+                  });
 
                   supabaseDatabaseActions.delete({
-                    inTable: 'temporary_user_data',
-                    match: {email: userData.email}
-                  })
+                    inTable: "temporary_user_data",
+                    match: { email: userData.email }
+                  });
                 }
-              })
+              });
             }
-          })
-        } else {console.log('username: ', session.user.user_metadata.username )}
+          });
+        } else { console.log("username: ", session.user.user_metadata.username); }
       }
-    })
-  }, [hasSession])
+    });
+  }, [hasSession, inputData.email]);
 
   return (
     <Box
-      as='form'
+      as="form"
       onSubmit={(event) => {
-        event.preventDefault()
-        sign == 'login' ? handleSignIn() : handleSignUp()
+        event.preventDefault();
+        sign == "login" ? handleSignIn() : handleSignUp();
       }}
       styleSheet={{
         flexGrow: 1,
-        padding: { sm: "0.8rem", md: '1.6rem', lg: '3.2rem' },
-        textAlign: 'center',
-        display: 'flex', alignItems: 'center', justifyContent: 'center'
+        padding: { sm: "0.8rem", md: "1.6rem", lg: "3.2rem" },
+        textAlign: "center",
+        display: "flex", alignItems: "center", justifyContent: "center"
       }}
     >
-      <fieldset style={{ border: 'none', maxWidth: '3.5rem' }} >
+      <fieldset style={{ border: "none", maxWidth: "3.5rem" }} >
         <Text
-          as='legend'
+          as="legend"
           styleSheet={{
-            fontSize: { xs: '4rem', md: '7rem' },
+            fontSize: { xs: "4rem", md: "7rem" },
             fontFamily: "'Lexend Deca', sans-serif",
-            animation: '1.2s fadeIn',
+            animation: "1.2s fadeIn",
           }}
         >
           {
             onLoading
               ? <Loading />
-              : sign === 'login'
-                ? 'LOGIN'
-                : 'CRIAR CONTA'
+              : sign === "login"
+                ? "LOGIN"
+                : "CRIAR CONTA"
           }
         </Text>
 
         {authError &&
           <span
-            style={{ color: colors.primary["red-error"], fontSize: 'clamp(12px, 14px, 16px)', lineHeight: '1.5' }}
+            style={{ color: colors.primary["red-error"], fontSize: "clamp(12px, 14px, 16px)", lineHeight: "1.5" }}
           >
             {authError}
           </span>}
 
-        <Box styleSheet={{ width: { xs: '90%', sm: '35rem' }, margin: '0 auto' }}>
+        <Box styleSheet={{ width: { xs: "90%", sm: "35rem" }, margin: "0 auto" }}>
           {
-            sign === 'signUp' &&
+            sign === "signUp" &&
             <TextField
-              onChange={el => handleGetInput(el, 'username')}
+              onChange={el => handleGetInput(el, "username")}
               placeholder="seu username"
-              type='text'
+              type="text"
               rounded="full"
               styleSheet={{
-                width: '100%',
-                marginTop: '1.5rem',
-                margin: '0 auto',
+                width: "100%",
+                marginTop: "1.5rem",
+                margin: "0 auto",
 
               }}
               value={inputData.username}
@@ -164,26 +153,26 @@ export function SignTypeToggle({ emailModal }) {
 
 
           <TextField
-            onChange={el => handleGetInput(el, 'email')}
+            onChange={el => handleGetInput(el, "email")}
             placeholder="seu email"
-            type='email'
+            type="email"
             rounded="full"
             styleSheet={{
-              width: '100%',
-              marginTop: '1.5rem',
-              margin: '0 auto',
+              width: "100%",
+              marginTop: "1.5rem",
+              margin: "0 auto",
 
             }}
             value={inputData.email}
           />
           <TextField
-            onChange={el => handleGetInput(el, 'password')}
+            onChange={el => handleGetInput(el, "password")}
             placeholder="sua senha"
-            type='password'
+            type="password"
             rounded="full"
             styleSheet={{
-              marginTop: '1.5rem',
-              margin: '0 auto'
+              marginTop: "1.5rem",
+              margin: "0 auto"
             }}
             value={inputData.password}
           />
@@ -192,21 +181,19 @@ export function SignTypeToggle({ emailModal }) {
         <SubmitButton />
 
         {
-          sign == 'login'
+          sign == "login"
             ?
             <FooterSignMessage
-              variant='loginVariant'
               changeSignType={setSign}
               selectedSignType={sign}
             />
             :
             <FooterSignMessage
-              variant='signUpVariant'
               changeSignType={setSign}
               selectedSignType={sign}
             />
         }
       </fieldset>
     </Box>
-  )
+  );
 }

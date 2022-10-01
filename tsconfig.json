@@ -24,7 +24,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/components/SignAction/SignTypeToggle/index.tsx", "src/components/SignAction/index.jsx"  ],
   "exclude": [
     "node_modules"
   ]

@@ -5,7 +5,7 @@ import {useState} from "react";
 
 import { Box } from "@skynexui/components";
 import { defaultSection } from "../src/common/styles/defaultSection";
-import { Chat } from "../src/components/Chat/index.jsx";
+import { Chat } from "../src/components/Chat";
 import { LogoutModal } from "../src/components/DefaultModal/LogoutModal";
 
 

@@ -3,7 +3,8 @@ import wassupLogo from "../public/wassup-logo.svg";
 import Head from "next/head";
 import type { AppProps } from "next/app";
 
-function MyApp({ Component, pageProps }: AppProps) {
+
+export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
@@ -15,5 +16,3 @@ function MyApp({ Component, pageProps }: AppProps) {
     </>
   );
 }
-
-export default MyApp;
