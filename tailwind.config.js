@@ -6,7 +6,7 @@ module.exports = {
   ],
   theme: {
     extend: {},
-    screens: {},
+    // screens: {},
     colors: {
       "brand": "#6636F1",
       "brand-hover": "#551FF0",

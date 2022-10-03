@@ -1,6 +1,6 @@
 export function AsideInfo() {
   return (
-    <aside className="flex flex-col justify-between items-center py-32 w-[36.85%] bg-brand-hover">
+    <aside className="hidden lg:flex flex-col justify-between items-center py-32 w-[36.85%]  bg-brand-hover">
       <div className="text-light-txt-100  text-center">
         <img className="block mx-auto" src="/wassup-logo.svg" alt="logo" />
 
