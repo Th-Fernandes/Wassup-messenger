@@ -18,6 +18,9 @@ module.exports = {
         100: "#FFFFFF",
         200: "#C3C3C3"
       },
+      "dark-txt": {
+        100: "#121212"
+      },
       "error": "#F9627D"
     },
     fontFamily: {

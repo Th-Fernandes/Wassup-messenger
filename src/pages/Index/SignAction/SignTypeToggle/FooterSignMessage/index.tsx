@@ -12,7 +12,7 @@ export function FooterSignMessage({ changeSignType, selectedSignType }: Props) {
   }
 
   return (
-    <small className="text-base text-center block mt-4">
+    <small className=" text-sm lg:text-base text-center block mt-4">
       {selectedSignType === "login" ? "Não" : "Já"} possui conta? 
       <span
         onClick={handleChangeSignAction}

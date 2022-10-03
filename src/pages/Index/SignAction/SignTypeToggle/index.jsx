@@ -7,6 +7,7 @@ import { FooterSignMessage } from "./FooterSignMessage";
 import { Loading } from ".";
 import PropTypes from "prop-types";
 import { InputContainer } from "components/InputContainer";
+import illustration from "assets/images/index-demonstration.png";
 
 SignTypeToggle.propTypes = {
   emailModal: PropTypes.func
@@ -88,13 +89,13 @@ export function SignTypeToggle({ emailModal }) {
 
   return (
     <form
-      className="grow py-32 bg-dark-bg-400"
+      className="grow py-32 bg-dark-bg-400 flex flex-col items-center justify-between"
       onSubmit={(event) => {
         event.preventDefault();
         sign == "login" ? handleSignIn() : handleSignUp();
       }}
     >
-      <fieldset className="max-w-[350px] mx-auto">
+      <fieldset className="w-[90%] max-w-[350px] mx-auto">
         <legend className="text-light-txt-100 text-5xl font-bold text-center mb-4">
           {
             onLoading
@@ -142,6 +143,8 @@ export function SignTypeToggle({ emailModal }) {
           selectedSignType={sign}
         />
       </fieldset>
+
+      <img src={illustration.src} alt="" />
     </form>
   );
 }

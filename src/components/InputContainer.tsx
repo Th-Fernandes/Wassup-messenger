@@ -8,7 +8,7 @@ interface Props {
 
 export function InputContainer({label, type="text", onChange}:Props) {
   return (
-    <div className="">
+    <div >
       <label 
         htmlFor={label}
         className="text-light-txt-100 mb-2 inline-block"
@@ -18,7 +18,7 @@ export function InputContainer({label, type="text", onChange}:Props) {
       <input 
         onChange={onChange}
         type={type}
-        className="w-full rounded-2xl h-10 px-4 focus:outline focus:outline-4 focus:outline-brand border-none"
+        className="w-full rounded-2xl h-10 px-4 focus:outline focus:outline-4 focus:outline-brand border-none text-dark-txt-100"
         name={label}  
       />
     </div>
