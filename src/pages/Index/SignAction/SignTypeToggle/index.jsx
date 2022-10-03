@@ -2,13 +2,11 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { supabaseDatabaseActions } from "helpers/supabase-database-actions";
 import { supabaseAuthActions } from "helpers/supabase-auth-actions";
-import colors from "common/colors.json";
-
-import { Text, Box, TextField } from "@skynexui/components";
-import { SubmitButton } from "./SubmitButton";
+// import colors from "common/colors.json";
 import { FooterSignMessage } from "./FooterSignMessage";
 import { Loading } from ".";
 import PropTypes from "prop-types";
+import { InputContainer } from "components/InputContainer";
 
 SignTypeToggle.propTypes = {
   emailModal: PropTypes.func
@@ -64,13 +62,7 @@ export function SignTypeToggle({ emailModal }) {
     supabaseAuthActions.getSessionInfo({
       hasSession: (session) => {
         const hasUserUsername = !session.user.user_metadata.username ? false : true;
-        // function getTemporaryData() {
-        //   supabaseDatabaseActions.readAll({
-        //     inTable: "temporary_user_data",
-        //     thenDo: (data) => { }
 
-        //   })
-        // }
         if (!hasUserUsername) {
           supabaseDatabaseActions.readAll({
             inTable: "temporary_user_data",
@@ -95,28 +87,15 @@ export function SignTypeToggle({ emailModal }) {
   }, [hasSession, inputData.email]);
 
   return (
-    <Box
-      as="form"
+    <form
+      className="grow py-32 bg-dark-bg-400"
       onSubmit={(event) => {
         event.preventDefault();
         sign == "login" ? handleSignIn() : handleSignUp();
       }}
-      styleSheet={{
-        flexGrow: 1,
-        padding: { sm: "0.8rem", md: "1.6rem", lg: "3.2rem" },
-        textAlign: "center",
-        display: "flex", alignItems: "center", justifyContent: "center"
-      }}
     >
-      <fieldset style={{ border: "none", maxWidth: "3.5rem" }} >
-        <Text
-          as="legend"
-          styleSheet={{
-            fontSize: { xs: "4rem", md: "7rem" },
-            fontFamily: "'Lexend Deca', sans-serif",
-            animation: "1.2s fadeIn",
-          }}
-        >
+      <fieldset className="max-w-[350px] mx-auto">
+        <legend className="text-light-txt-100 text-5xl font-bold text-center mb-4">
           {
             onLoading
               ? <Loading />
@@ -124,76 +103,45 @@ export function SignTypeToggle({ emailModal }) {
                 ? "LOGIN"
                 : "CRIAR CONTA"
           }
-        </Text>
+        </legend>
 
-        {authError &&
-          <span
-            style={{ color: colors.primary["red-error"], fontSize: "clamp(12px, 14px, 16px)", lineHeight: "1.5" }}
-          >
+        {authError && 
+          <span className="text-error text-center block mb-2">
             {authError}
-          </span>}
+          </span>
+        }
 
-        <Box styleSheet={{ width: { xs: "90%", sm: "35rem" }, margin: "0 auto" }}>
+        <div className="flex flex-col gap-4">
           {
             sign === "signUp" &&
-            <TextField
+            <InputContainer 
               onChange={el => handleGetInput(el, "username")}
-              placeholder="seu username"
-              type="text"
-              rounded="full"
-              styleSheet={{
-                width: "100%",
-                marginTop: "1.5rem",
-                margin: "0 auto",
-
-              }}
-              value={inputData.username}
+              label="Username"
             />
-          }
-
-
-          <TextField
+          }         
+          <InputContainer 
             onChange={el => handleGetInput(el, "email")}
-            placeholder="seu email"
-            type="email"
-            rounded="full"
-            styleSheet={{
-              width: "100%",
-              marginTop: "1.5rem",
-              margin: "0 auto",
-
-            }}
-            value={inputData.email}
+            label="E-mail"
           />
-          <TextField
+          <InputContainer 
             onChange={el => handleGetInput(el, "password")}
-            placeholder="sua senha"
+            label="Senha"
             type="password"
-            rounded="full"
-            styleSheet={{
-              marginTop: "1.5rem",
-              margin: "0 auto"
-            }}
-            value={inputData.password}
           />
-        </Box>
+        </div>
 
-        <SubmitButton />
+        <button
+          type="submit" 
+          className="w-full bg-brand rounded-2xl h-[45px] mt-8 text-light-txt-100 font-medium text-lg"
+        >
+          Entrar
+        </button>
 
-        {
-          sign == "login"
-            ?
-            <FooterSignMessage
-              changeSignType={setSign}
-              selectedSignType={sign}
-            />
-            :
-            <FooterSignMessage
-              changeSignType={setSign}
-              selectedSignType={sign}
-            />
-        }
+        <FooterSignMessage
+          changeSignType={setSign}
+          selectedSignType={sign}
+        />
       </fieldset>
-    </Box>
+    </form>
   );
 }

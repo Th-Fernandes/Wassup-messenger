@@ -19,6 +19,9 @@ module.exports = {
         200: "#C3C3C3"
       },
       "error": "#F9627D"
+    },
+    fontFamily: {
+      sans: ["Roboto", "sans-serif"]
     }
   },
   plugins: [],
