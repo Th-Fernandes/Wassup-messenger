@@ -1,11 +1,13 @@
-import { Box } from "@skynexui/components";
-import { SignAction } from "components/SignAction";
-import colors from "common/colors.json";
+// import { Box } from "@skynexui/components";
+// import { SignAction } from "components/SignAction";
+// import colors from "common/colors.json";
+import { SignActionPage } from "pages/Index";
 
 export default function LoginPage() {
   return (
     <main>
-      <Box
+      <SignActionPage />
+      {/* <Box
         as="section"
         styleSheet={{
           width: "100%",
@@ -17,7 +19,7 @@ export default function LoginPage() {
         }}
       >
         <SignAction />
-      </Box>
+      </Box> */}
     </main>
   );
 }

@@ -1,5 +1,5 @@
 import { Button } from "@skynexui/components";
-import colors from "../../../../common/colors.json";
+import colors from "common/colors.json";
 
 export function SubmitButton() {
   return (

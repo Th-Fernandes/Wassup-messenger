@@ -6,6 +6,20 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    screens: {},
+    colors: {
+      "brand": "#6636F1",
+      "brand-hover": "#551FF0",
+      "dark-bg": {
+        200: "#181818",
+        400: "#242424"
+      },
+      "light-txt": {
+        100: "#FFFFFF",
+        200: "#C3C3C3"
+      },
+      "error": "#F9627D"
+    }
   },
   plugins: [],
 };

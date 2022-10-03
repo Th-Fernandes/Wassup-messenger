@@ -2,14 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
 html {
-  font-size: 62.5%;
   --purple-primary: #6636f1;
   --white-100: #FFFFFF;
 }
@@ -17,9 +10,6 @@ html {
 
 body {
   background: linear-gradient(159deg, rgba(15,15,15,1) 0%, rgba(34,42,104,1) 100%);
-  min-height: 100vh;
-  max-width: 144rem;
-  margin: 0 auto;
 }
 
 ::selection:not(img)   {
@@ -32,33 +22,11 @@ img::selection {
   color: transparent;
 }
 
-body  main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
-
 ul {
   list-style-type: none;
 }
-
-:root, button {
-  font-family: 'Lexend Deca', sans-serif;
-  color: #F5F5F5;
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  background-color: var(--purple-primary);
-  min-height: 2.7rem;
-  border-radius: 0.8rem;
-  font-size: 1.6rem;
-}
-
 /* ================= */
-@keyframes fadeIn {
+/* @keyframes fadeIn {
   from {
     opacity: 0;
     visibility: hidden;
@@ -96,4 +64,4 @@ button {
   to {
     transform: rotate(360deg);
   }
-}
+} */
