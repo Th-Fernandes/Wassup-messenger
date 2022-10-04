@@ -1,18 +1,14 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { supabaseAuthActions } from "../src/helpers/supabase-auth-actions";
-import {useState} from "react";
-
-import { Box } from "@skynexui/components";
-import { defaultSection } from "../src/common/styles/defaultSection";
-import { Chat } from "../src/components/Chat";
-import { LogoutModal } from "../src/components/DefaultModal/LogoutModal";
+import { supabaseAuthActions } from "helpers/supabase-auth-actions";
+import { useState } from "react";
+import { Chat } from "pages/Chat";
+import { LogoutModal } from "components/DefaultModal/LogoutModal";
 
 
 export default function Home() {
   const [isLogoutModalOpened, setIsLogoutModalOpened] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
-  // const [sessionId, setSessionId] = useState("");
   const router = useRouter();
 
   function handleToggleModalState() {
@@ -21,7 +17,7 @@ export default function Home() {
 
   useEffect(() => {
     supabaseAuthActions.getSessionInfo({
-      hasSession: () => {},
+      hasSession: () => { },
       hasNotSession: () => router.push("/")
     });
 
@@ -29,23 +25,17 @@ export default function Home() {
 
   return (
     <main>
-      <Box
-        as="section"
-        styleSheet={defaultSection}
-      >
-        <Chat 
-          closeLogoutModal={handleToggleModalState}  
+      <Chat/>
+
+      {
+        isLogoutModalOpened &&
+        <LogoutModal
+          closeLogoutModal={handleToggleModalState}
+          isSigningOut={setIsSigningOut}
+          signOutState={isSigningOut}
         />
-        
-        {
-          isLogoutModalOpened &&
-          <LogoutModal 
-            closeLogoutModal={handleToggleModalState}  
-            isSigningOut={setIsSigningOut}
-            signOutState={isSigningOut}
-          />
-        }
-      </Box>
+      }
+
     </main>
   );
 }

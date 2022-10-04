@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../../../common/utils/supabaseClient";
-import { supabaseAuthActions } from "../../../helpers/supabase-auth-actions";
-import { supabaseDatabaseActions } from "../../../helpers/supabase-database-actions";
-import colors from "../../../common/colors.json";
+import { supabase } from "common/utils/supabaseClient";
+import { supabaseAuthActions } from "helpers/supabase-auth-actions";
+import { supabaseDatabaseActions } from "helpers/supabase-database-actions";
 
-import { Box } from "@skynexui/components";
 import ReceivedMessage from "./ReceivedMessage/ReceivedMessage";
 import SendedMessage from "./SendedMessage/SendedMessage";
 import { SendMessageForm } from "./SendMessageForm";
@@ -64,49 +62,27 @@ export default function Messages() {
     });
   }, [onSendMessage]);
 
-
-
-
-
   return (
-    <>
-      <Box
-        id="chatBox"
-        styleSheet={{
-          backgroundColor: colors.neutrals["black-300"],
-          padding: "1.6rem",
-          margin: { xs: "0.8rem", sm: 0 },
-          marginTop: "1.2rem",
-          borderRadius: "0.8rem",
-          height: { xs: "95%", md: "95%" },
-          overflowY: "scroll",
-          scrollBehavior: "smooth"
-        }}
-      >
-        <Box
-          as='ul'
-          styleSheet={{ paddingBottom: "4rem" }}
-        >
-          {
-            messages &&
-            messages.map((data, index) => (
-              data.message !== null
-                ? (
-                  data.session_id === sessionId
-                    ? <SendedMessage messageData={data} key={index + "-SD"} />
-                    : <ReceivedMessage messageData={data} key={index + "-RC"} />
-                )
-                : <LogOutMessage username={data.username} />
-            ))
-          }
-        </Box>
-      </Box>
+    <div className="overflow-y-scroll max-h-[88.25vh] bg-dark-bg-400">
+      <ul className="mb-12 px-4 md:px-6 lg:px-16">
+        {
+          messages &&
+          messages.map((data, index) => (
+            data.message !== null
+              ? data.session_id === sessionId
+                ? <SendedMessage messageData={data} key={index + "-SD"} />
+                : <ReceivedMessage messageData={data} key={index + "-RC"} />
+              
+              : <LogOutMessage username={data.username} />
+          ))
+        }
+      </ul>
 
       <SendMessageForm
         onSendMessage={setOnSendMessage}
         onWriteMessage={setInputMessage}
-        writtenMessage={inputMessage} />
-    </>
-
+        writtenMessage={inputMessage} 
+      />
+    </div>
   );
 }

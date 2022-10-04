@@ -1,5 +1,6 @@
-import { Box, TextField } from "@skynexui/components";
-import {PaperPlaneRight,SmileySticker} from "phosphor-react";
+// import { Box, TextField } from "@skynexui/components";
+import { PaperPlaneTilt } from "phosphor-react";
+import theme from "assets/theme/index.json";
 
 interface Props {
   onSendMessage,
@@ -7,21 +8,38 @@ interface Props {
   writtenMessage
 }
 
-export function SendMessageForm({onSendMessage, onWriteMessage, writtenMessage}:Props) {
-  
+export function SendMessageForm({ onSendMessage, onWriteMessage, writtenMessage }: Props) {
+
   function handleInputValue(element) {
     const inputValue = element.target.value;
-    console.log(inputValue);
     onWriteMessage(inputValue);
   }
 
   function handleSubmitMessage(event) {
     event.preventDefault();
-    if(writtenMessage) onSendMessage(test => !test);
+    if (writtenMessage) onSendMessage(test => !test);
   }
 
   return (
-    <Box
+    <form
+      onSubmit={event => handleSubmitMessage(event)}
+      className="fixed bottom-8 w-full flex justify-center gap-4 " >
+      <input 
+        onKeyPress={(event) => { if (event.key === "Enter") handleSubmitMessage(event); }}
+        onChange={element => handleInputValue(element)}
+        value={writtenMessage}
+        type="text" 
+        className="block bg-dark-bg-300 h-12 max-w-[720px] w-3/4 rounded-[32px] px-4" 
+      />
+      <button className="rounded-full bg-brand w-12 h-12 flex items-center justify-center hover:bg-brand-hover">
+        <PaperPlaneTilt size={32} color={theme.colors.input} weight="fill" />
+      </button>
+    </form>
+  );
+}
+
+/* 
+<Box
       as='form'
       // onSubmit={event => {
       //   console.log(event);
@@ -65,5 +83,4 @@ export function SendMessageForm({onSendMessage, onWriteMessage, writtenMessage}:
         <PaperPlaneRight size={50} weight="fill" />
       </button>
     </Box>
-  );
-}
+*/
