@@ -1,31 +1,23 @@
-import { Box,  } from "@skynexui/components";
-import colors from "common/colors.json";
+import { UserCircle } from "phosphor-react";
 
 interface Props {
-  messageData: any
+  messageData: {
+    message: string;
+    username: string;
+    created_at: string;
+  }
 }
 
 export default function SendedMessage({messageData}: Props) {
   return(
-    <li
-      style={{ 
-        margin: "3rem 0", 
-        display: "flex",
-        justifyContent: "flex-end"
-      }}
-    >
-      <Box
-        styleSheet={{
-          backgroundColor: colors.primary["purple"],
-          maxWidth: "50rem",
-          padding: "1.6rem 1.2rem",
-          borderRadius: "1.6rem 1.6rem  0 1.6rem",
-          wordBreak: "break-all",
-          fontSize: "1.4rem"
-        }}
-      >
+    <li className="my-8 flex flex-col items-end">
+      <div className="bg-brand max-w-[350px] text-base pt-4 pb-7 px-6 mb-3 rounded-3xl rounded-br-none ">
         {messageData.message}
-      </Box>
+      </div>
+      <div className="flex items-end gap-2 text-light-txt-200 text-sm">
+        <span>{messageData.username}</span>
+        <UserCircle size={32}  weight="fill" />
+      </div>
     </li>
   );
 }
