@@ -10,6 +10,7 @@ module.exports = {
     colors: {
       "brand": "#6636F1",
       "brand-hover": "#551FF0",
+      "brand-border": "#AA88FF",
       "dark-bg": {
         100: "#434343",
         200: "#181818",
