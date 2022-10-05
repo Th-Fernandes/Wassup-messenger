@@ -5,22 +5,16 @@ import { supabaseDatabaseActions } from "helpers/supabase-database-actions";
 
 import ReceivedMessage from "./ReceivedMessage/ReceivedMessage";
 import SendedMessage from "./SendedMessage/SendedMessage";
-import { SendMessageForm } from "./SendMessageForm";
 import { LogOutMessage } from "./LogOutMessage";
 
 export default function Messages() {
   const [messages, setMessages] = useState([]);
-  const [onSendMessage, setOnSendMessage] = useState(false);
-  const [inputMessage, setInputMessage] = useState("");
   const [sessionId, setSessionId] = useState();
-  const [userData, setUserData] = useState();
-
 
   useEffect(() => {
     supabaseAuthActions.getSessionInfo({
       hasSession: session => {
         setSessionId(session.user.id);
-        setUserData(session.user.user_metadata);
         console.log(session.user.user_metadata.username);
       },
       hasNotSession: () => { throw new Error("não foi possível pegar os dados da sessão."); }
@@ -28,43 +22,26 @@ export default function Messages() {
 
   }, []);
 
+
   useEffect(() => {
-    function insertRealTime(addMessage) {
-      const mySubscription = supabase
-        .from("messages")
-        .on("*", response => {
-          addMessage(response.new);
-        })
-        .subscribe();
-
-      return mySubscription;
-    }
-
-    if (inputMessage) {
-      supabaseDatabaseActions.insert({
+    if(messages.length === 0 || !messages) {
+      supabaseDatabaseActions.readAll({
         inTable: "messages",
-        createRow: [{
-          username: userData.username,
-          message: inputMessage,
-          session_id: sessionId
-        }],
-        thenDo: () => setInputMessage("")
+        thenDo: messages => setMessages(messages) 
       });
     }
 
-    insertRealTime(newMessage => {
-      setMessages(oldMessages => [...oldMessages, newMessage]);
-    });
-
-    supabaseDatabaseActions.readAll({
-      inTable: "messages",
-      thenDo: (data) => setMessages(data)
-    });
-  }, [onSendMessage]);
+    supabase
+      .from("messages")
+      .on("INSERT", payload => {
+        setMessages(messages => [ ...messages, payload.new]);
+      })
+      .subscribe();
+  }, []);
 
   return (
-    <div className="overflow-y-scroll max-h-[88.25vh] bg-dark-bg-400">
-      <ul className="mb-12 px-4 md:px-6 lg:px-16">
+    <div className=" overflow-auto  bg-dark-bg-400">
+      <ul className=" px-4 md:px-6 lg:px-16 pb-7">
         {
           messages &&
           messages.map((data, index) => (
@@ -77,12 +54,6 @@ export default function Messages() {
           ))
         }
       </ul>
-
-      <SendMessageForm
-        onSendMessage={setOnSendMessage}
-        onWriteMessage={setInputMessage}
-        writtenMessage={inputMessage} 
-      />
     </div>
   );
 }
