@@ -4,7 +4,7 @@ import { Menu } from "./Menu";
 
 export function ChatsContainer() {
   return (
-    <aside className="bg-brand w-[36.80%] max-w-[365px] p-8">
+    <aside className="bg-brand w-[36.80%] max-w-[365px] p-8 hidden lg:block">
       <Menu/>
 
       <ul className="mt-14">
