@@ -7,7 +7,7 @@ import ReceivedMessage from "./ReceivedMessage/ReceivedMessage";
 import SendedMessage from "./SendedMessage/SendedMessage";
 import { LogOutMessage } from "./LogOutMessage";
 
-export default function Messages() {
+export function Messages() {
   const [messages, setMessages] = useState([]);
   const [sessionId, setSessionId] = useState();
 

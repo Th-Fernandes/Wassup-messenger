@@ -1,4 +1,4 @@
-import Messages from "./Messages/messages";
+import {Messages} from "./Messages/messages";
 import {ChatHeader} from "./ChatHeader";
 import { DotsThreeCircleVertical, Sun, UserCircle } from "phosphor-react";
 import { SendMessageForm } from "./Messages/SendMessageForm";
