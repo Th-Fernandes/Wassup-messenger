@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { supabase } from "common/utils/supabaseClient";
+import { supabase } from "utils/supabaseClient";
 import { supabaseAuthActions } from "helpers/supabase-auth-actions";
 import { supabaseDatabaseActions } from "helpers/supabase-database-actions";
 

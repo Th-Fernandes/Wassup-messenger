@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { supabaseAuthActions } from "helpers/supabase-auth-actions";
 import { Chat } from "pages/Chat";
 import * as Dialog  from "@radix-ui/react-dialog";
-import { supabase } from "common/utils/supabaseClient";
+import { supabase } from "utils/supabaseClient";
 
 
 export default function Home() {

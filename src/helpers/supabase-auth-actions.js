@@ -1,4 +1,4 @@
-import { supabase } from "../common/utils/supabaseClient";
+import { supabase } from "utils/supabaseClient";
 import {supabaseDatabaseActions} from "./supabase-database-actions";
 
 export const supabaseAuthActions = {

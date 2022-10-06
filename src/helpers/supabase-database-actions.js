@@ -1,4 +1,4 @@
-import { supabase } from "../common/utils/supabaseClient";
+import { supabase } from "utils/supabaseClient";
 
 export const supabaseDatabaseActions = {
   async insert({ inTable, createRow, thenDo }) {
