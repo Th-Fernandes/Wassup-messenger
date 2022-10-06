@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.0.0",
     "@skynexui/components": "^1.25.0",
     "@supabase/supabase-js": "^1.35.2",
     "next": "^12.3.1",

@@ -1,5 +1,6 @@
 import { DotsThreeCircleVertical, Sun, UserCircle } from "phosphor-react";
 import { useState } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
 
 export function Menu() {
   const [isOptionsOpened, setIsOptionsOpened] = useState<boolean>(false);
@@ -11,7 +12,7 @@ export function Menu() {
           <button className="w-8">
             <UserCircle size={32} />
           </button>
-          <button 
+          <button
             onClick={() => setIsOptionsOpened((state: boolean) => !state)}
             className="w-8"
           >
@@ -31,7 +32,9 @@ export function Menu() {
               <button>Perfil</button>
             </li>
             <li>
-              <button>Sair</button>
+              <Dialog.Trigger asChild>
+                <button>Sair</button>
+              </Dialog.Trigger>
             </li>
           </ul>
         </div>
