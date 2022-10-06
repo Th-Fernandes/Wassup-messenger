@@ -1,28 +1,22 @@
 import { useEffect, useState } from "react";
 import { supabase } from "utils/supabaseClient";
-import { supabaseAuthActions } from "helpers/supabase-auth-actions";
 import ReceivedMessage from "./ReceivedMessage/ReceivedMessage";
 import SendedMessage from "./SendedMessage/SendedMessage";
 import { LogOutMessage } from "./LogOutMessage";
 import { useDatabase } from "hooks/useDatabase";
 import { MessagesTable } from "types/MessagesTable";
+import { useAuth } from "hooks/useAuth";
 
 export function Messages() {
-  const [messages, setMessages] = useState<MessagesTable[]>([]);
-  const [sessionId, setSessionId] = useState();
   const database = useDatabase();
+  const auth = useAuth();
+  const [messages, setMessages] = useState<MessagesTable[]>([]);
+  const [sessionId, setSessionId] = useState("");
 
   useEffect(() => {
-    supabaseAuthActions.getSessionInfo({
-      hasSession: session => {
-        setSessionId(session.user.id);
-        console.log(session.user.user_metadata.username);
-      },
-      hasNotSession: () => { throw new Error("não foi possível pegar os dados da sessão."); }
-    });
-
+    const hasSession = auth.getSession() === null ? false : true;
+    if(hasSession) setSessionId(auth.getSession().user.id);
   }, []);
-
 
   useEffect(() => {
     if(messages.length === 0 || !messages) {
@@ -44,7 +38,6 @@ export function Messages() {
     <div className=" overflow-auto  bg-dark-bg-400">
       <ul className=" px-4 md:px-6 lg:px-16 pb-7">
         {
-          messages &&
           messages.map((data, index) => (
             data.message !== null
               ? data.session_id === sessionId

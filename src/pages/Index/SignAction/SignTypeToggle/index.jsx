@@ -1,22 +1,20 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { supabaseAuthActions } from "helpers/supabase-auth-actions";
 import { FooterSignMessage } from "./FooterSignMessage";
-import { Loading } from ".";
-import PropTypes from "prop-types";
+import { Loading } from "components/Loading";
 import { InputContainer } from "components/InputContainer";
 import illustration from "assets/images/index-demonstration.png";
+import { useAuth } from "hooks/useAuth";
 
-SignTypeToggle.propTypes = {
-  emailModal: PropTypes.func
-};
 
-export function SignTypeToggle({ emailModal }) {
+
+export function SignTypeToggle() {
+  const auth = useAuth();
+  const router = useRouter();
   const [sign, setSign] = useState("login");
   const [inputData, setInputData] = useState({ email: "", password: "", username: "" });
   const [onLoading, setOnLoading] = useState(false);
   const [authError, setAuthError] = useState(null);
-  const router = useRouter();
 
   function handleGetInput(input, dataType) {
     const userData = input.target.value;
@@ -26,14 +24,19 @@ export function SignTypeToggle({ emailModal }) {
   async function handleSignIn() {
     setOnLoading(true);
 
-    supabaseAuthActions.signIn({
-      ...inputData,
-      onError: signInErrorMessage => setAuthError(signInErrorMessage),
-      thenDo: () => {
-        router.push("/chat");
-        setOnLoading(false);
-      }
-    });
+    auth
+      .signIn(
+        inputData.email,
+        inputData.password,
+        error => setAuthError(error.message)
+      )
+      .then(isSignInDone => {
+        if (isSignInDone) {
+          setOnLoading(false);
+          router.push("/chat");
+        }
+      });
+
     setOnLoading(false);
   }
 
@@ -41,16 +44,19 @@ export function SignTypeToggle({ emailModal }) {
   async function handleSignUp() {
     setOnLoading(true);
 
-    supabaseAuthActions.signUp({
-      ...inputData,
-      onError: signUpErrorMessage => setAuthError(signUpErrorMessage),
-      thenDo: () => {
-        emailModal(true);
-        setSign("login");
-        setInputData({ email: "", password: "" });
-        setOnLoading(false);
-      }
-    });
+    auth
+      .signUp(
+        inputData.email,
+        inputData.password,
+        inputData.username,
+        error => setAuthError(error.message)
+      )
+      .then(isSignUpDone => {
+        if (isSignUpDone) {
+          setSign("login");
+          setOnLoading(false);
+        }
+      });
   }
 
 
@@ -73,7 +79,7 @@ export function SignTypeToggle({ emailModal }) {
           }
         </legend>
 
-        {authError && 
+        {authError &&
           <span className="text-error text-center block mb-2">
             {authError}
           </span>
@@ -82,16 +88,16 @@ export function SignTypeToggle({ emailModal }) {
         <div className="flex flex-col gap-4">
           {
             sign === "signUp" &&
-            <InputContainer 
+            <InputContainer
               onChange={el => handleGetInput(el, "username")}
               label="Username"
             />
-          }         
-          <InputContainer 
+          }
+          <InputContainer
             onChange={el => handleGetInput(el, "email")}
             label="E-mail"
           />
-          <InputContainer 
+          <InputContainer
             onChange={el => handleGetInput(el, "password")}
             label="Senha"
             type="password"
@@ -99,7 +105,7 @@ export function SignTypeToggle({ emailModal }) {
         </div>
 
         <button
-          type="submit" 
+          type="submit"
           className="w-full bg-brand rounded-2xl h-[45px] mt-8 text-light-txt-100 font-medium text-lg"
         >
           Entrar

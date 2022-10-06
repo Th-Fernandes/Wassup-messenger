@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { supabaseAuthActions } from "helpers/supabase-auth-actions";
 import { Chat } from "pages/Chat";
 import * as Dialog  from "@radix-ui/react-dialog";
 import { supabase } from "utils/supabaseClient";
+import { useAuth } from "hooks/useAuth";
 
 
 export default function Home() {
   const router = useRouter();
+  const auth = useAuth();
 
   async function handleSignOut() {
     const { error } = await supabase.auth.signOut();
@@ -17,10 +18,11 @@ export default function Home() {
   }
 
   useEffect(() => {
-    supabaseAuthActions.getSessionInfo({
-      hasSession: () => { },
-      hasNotSession: () => router.push("/")
-    });
+    const hasSession =  auth.getSession() === null ? false : true;
+
+    if(!hasSession) {
+      router.push("/");
+    }
 
   }, []);
 

@@ -6,17 +6,20 @@ export function useAuth() {
       return supabase.auth.session();
     },
 
-    async signIn(email:string, password:string){
+    async signIn(email:string, password:string, handleError:any){
       const { error } = await supabase.auth.signIn({
         email,
         password,
       });
 
-      if(error) return error;
+      if(error) {
+        handleError(error);
+        return false;
+      }
       return true;
     },
 
-    async signUp(email:string, password:string, username:string) {
+    async signUp(email:string, password:string, username:string, handleError:any) {
       const { error } = await supabase.auth.signUp(
         {
           email,
@@ -29,7 +32,10 @@ export function useAuth() {
         }
       );
 
-      if(error) return error;
+      if(error) {
+        handleError(error);
+        return false;
+      }
       return true;
     },
 
