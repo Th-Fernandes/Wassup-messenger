@@ -3,10 +3,6 @@ import { ChatHeader } from "./MessageContainer/ChatHeader";
 import { Messages } from "./MessageContainer/Messages/messages";
 import { SendMessageForm } from "./MessageContainer/SendMessageForm";
 
-export interface ChatProps {
-  closeLogoutModal: () => void
-}
-
 export function Chat() {
   return (
     <section className="h-screen flex max-w-[1440px] mx-auto">

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { supabaseDatabaseActions } from "helpers/supabase-database-actions";
 import { supabaseAuthActions } from "helpers/supabase-auth-actions";
-// import colors from "common/colors.json";
 import { FooterSignMessage } from "./FooterSignMessage";
 import { Loading } from ".";
 import PropTypes from "prop-types";

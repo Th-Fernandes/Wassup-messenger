@@ -1,5 +1,5 @@
 import { Box, Text, Button } from "@skynexui/components";
-import colors from "common/colors.json";
+import theme from "assets/theme/index.json";
 import {Envelope} from "phosphor-react";
 import { Dispatch, SetStateAction } from "react";
 
@@ -11,25 +11,22 @@ export function EmailConfirm({emailModal}:Props) {
 
   return (
     <Box
-      // id="emailModal"
-      // onClick={(event) => { event.target.id === "emailModal" ? emailModal(false) : "";}}
       styleSheet={{
         position: "fixed",
         inset: 0,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: colors.neutrals["black-modal-bg"],
+        backgroundColor: theme.colors["bg-dark-200"],
         zIndex: 99,
         width: "100vw",
         height: "100vh"
       }}
     >
       <Box
-        // onBlur={() => emailModal(false)}
         as="article"
         styleSheet={{
-          backgroundColor: colors.neutrals["black-300"],
+          backgroundColor: theme.colors["bg-dark"],
           width: "min(90%, 80rem)",
           minHeight: "20rem",
           padding: {xs: ".8rem", md: "1.6rem", xl: "3.2rem"},
@@ -60,7 +57,6 @@ export function EmailConfirm({emailModal}:Props) {
           label="voltar ao menu principal"
           onClick={() => {
             emailModal(false);
-            //router.push('/')
           }}
         />
       </Box>
