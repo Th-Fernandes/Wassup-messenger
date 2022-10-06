@@ -1,27 +1,26 @@
 import { PaperPlaneTilt } from "phosphor-react";
 import theme from "assets/theme/index.json";
-import { ChangeEvent, useState } from "react";
-import { supabaseDatabaseActions } from "helpers/supabase-database-actions";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { supabase } from "utils/supabaseClient";
+import { useDatabase } from "hooks/useDatabase";
 
 export function SendMessageForm() {
   const [message, setMessage] = useState<string>("");
+  const database = useDatabase();
 
   function handleGetMessageValue(event: ChangeEvent<HTMLInputElement>) {
     const messageContent = event.target.value;
     setMessage(messageContent);
   }
 
-  function handleSubmitMessageToDatabase(event) {
+  function handleSubmitMessageToDatabase(event:FormEvent<HTMLFormElement | HTMLInputElement>) {
     event.preventDefault();
 
     const {user} = supabase.auth.session();
 
-    supabaseDatabaseActions.insert({
-      inTable: "messages",
-      createRow: {message, session_id: user.id, username: user.user_metadata.username },
-      thenDo: () => {}
-    });
+    database
+      .insert({message, session_id: user.id, username: user.user_metadata.username })
+      .from("messages");
 
     setMessage("");
   }

@@ -1,14 +1,12 @@
 import { UserCircle } from "phosphor-react";
+import type { MessagesTable } from "types/MessagesTable";
 
 interface Props {
-  messageData: {
-    message: string;
-    username: string;
-    created_at: string;
-  }
+  messageData:MessagesTable
 }
 
-export default function SendedMessage({messageData}: Props) {
+
+export default function SendedMessage({messageData}:Props) {
   return(
     <li className="my-8 flex flex-col items-end">
       <div className="bg-brand max-w-[350px] text-base pt-4 pb-7 px-6 mb-3 rounded-3xl rounded-br-none ">

@@ -1,35 +1,22 @@
+import { MessagesTable } from "types/MessagesTable";
 import { supabase } from "utils/supabaseClient";
 
-interface MessageTableRow {
-  username: string,
-  message: string,
-  session_id: string
-}
+
 
 export function useDatabase() {
   return {
     readAll: {
       async from(table: string, errorHandler?: () => void) {
         const { data, error } = await supabase
-          .from(table)
+          .from<MessagesTable>(table)
           .select("*");
 
         if (error) return errorHandler();
-        return data;
-      }
-    },
-    insert2: {
-      async from(table: string, newContent: MessageTableRow, errorHandler?: () => void) {
-        const { error } = await supabase
-          .from(table)
-          .insert(newContent);
-
-        if (error) return errorHandler();
-        return true;
+        return data ;
       }
     },
 
-    insert(newRow:MessageTableRow) {
+    insert(newRow:MessagesTable) {
       return {
         newRow,
         async from(table: string, errorHandler?: () => void) {

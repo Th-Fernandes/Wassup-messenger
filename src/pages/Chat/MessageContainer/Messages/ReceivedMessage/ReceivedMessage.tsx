@@ -1,12 +1,10 @@
 import {UserCircle} from "phosphor-react";
+import type { MessagesTable } from "types/MessagesTable";
 
 interface Props {
-  messageData: {
-    message: string;
-    username: string;
-    created_at: string;
-  }
+  messageData:MessagesTable
 }
+
 
 export default function ReceivedMessage({messageData}:Props) {
   function handleMessageTime(messageDate) {

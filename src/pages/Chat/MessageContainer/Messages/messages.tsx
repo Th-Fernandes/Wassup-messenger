@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { supabase } from "utils/supabaseClient";
 import { supabaseAuthActions } from "helpers/supabase-auth-actions";
-import { supabaseDatabaseActions } from "helpers/supabase-database-actions";
-
 import ReceivedMessage from "./ReceivedMessage/ReceivedMessage";
 import SendedMessage from "./SendedMessage/SendedMessage";
 import { LogOutMessage } from "./LogOutMessage";
+import { useDatabase } from "hooks/useDatabase";
+import { MessagesTable } from "types/MessagesTable";
 
 export function Messages() {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<MessagesTable[]>([]);
   const [sessionId, setSessionId] = useState();
+  const database = useDatabase();
 
   useEffect(() => {
     supabaseAuthActions.getSessionInfo({
@@ -25,10 +26,10 @@ export function Messages() {
 
   useEffect(() => {
     if(messages.length === 0 || !messages) {
-      supabaseDatabaseActions.readAll({
-        inTable: "messages",
-        thenDo: messages => setMessages(messages) 
-      });
+      database
+        .readAll
+        .from("messages")
+        .then((messages) =>messages && setMessages(messages));
     }
 
     supabase
