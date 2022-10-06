@@ -1,8 +1,6 @@
 import { MessagesTable } from "types/MessagesTable";
 import { supabase } from "utils/supabaseClient";
 
-
-
 export function useDatabase() {
   return {
     readAll: {
