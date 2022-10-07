@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="./src/assets/images/readme-banner.png" />
+  <img src="./.github/readme-banner.png" />
 </h1>
 
 <h2> O que é esse projeto? </h2>
@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <img src="./src/assets/images/readme-demonstration.png" />
+  <img src="./.github/readme-demonstration.png" />
 </p>
 
 <div>
