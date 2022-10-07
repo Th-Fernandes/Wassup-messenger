@@ -14,7 +14,7 @@ export default function LoginPage() {
           <Dialog.Overlay className="fixed inset-0 z-20 bg-dark-bg-300/50 flex items-center justify-center">
             <Dialog.Content>
               <div className="bg-dark-bg-300 rounded-2xl min-h-[200px] max-w-md p-4 flex flex-col justify-between">
-                <div className="text-dark-bg-400 text-light-txt-100">
+                <div className="text-light-txt-100">
                   <h2 className="text-2xl text-center mb-4">Falta pouco!</h2>
                   <p className="text-base">
                     Falta apenas um passo para liberarmos o acesso a sua conta: Precisamos 
@@ -32,7 +32,6 @@ export default function LoginPage() {
           </Dialog.Overlay>
         </Dialog.Portal>
       </Dialog.Root>
-
     </main>
   );
 }
