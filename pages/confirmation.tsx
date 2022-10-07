@@ -17,7 +17,6 @@ export default function Confirmation() {
                   o mensageiro roxo :)
                 </p>
               </div>
-
               <div className="flex justify-center mt-4">
                 <Dialog.Close
                   onClick={() => router.push("/")} 

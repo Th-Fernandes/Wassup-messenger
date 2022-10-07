@@ -40,17 +40,19 @@ export function SignTypeToggle({setIsEmailModalOpened}:Props) {
       .signIn(
         inputData.email,
         inputData.password,
-        error => setAuthError(error.message)
+        error => {
+          setAuthError(error.message);
+          setOnLoading(false);
+        }
       )
       .then(isSignInDone => {
         if (isSignInDone) {
           setOnLoading(false);
           router.push("/chat");
-          setIsEmailModalOpened(true);
         }
       });
 
-    setOnLoading(false);
+    
   }
 
 
@@ -62,7 +64,10 @@ export function SignTypeToggle({setIsEmailModalOpened}:Props) {
         inputData.email,
         inputData.password,
         inputData.username,
-        error => setAuthError(error.message)
+        error => {
+          setAuthError(error.message);
+          setOnLoading(false);
+        }
       )
       .then(isSignUpDone => {
         if (isSignUpDone) {
