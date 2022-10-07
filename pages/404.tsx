@@ -1,34 +1,32 @@
-import { Box } from "@skynexui/components";
+import { NextImage } from "components/Next/Image";
 import { useRouter } from "next/router";
 
 export default function Error404() {
   const router = useRouter();
 
   return (
-    <Box
-      as="article"
-      styleSheet={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-        height: "100vh",
-        textAlign: "center",
-      }}
-    >
-      <h1 style={{ fontSize: "clamp(2.5rem, 10vw, 5rem)" }}>Ops! algo deu errado</h1>
-      <p style={{ fontSize: "clamp(1.2rem, 8vw, 1.6rem)", marginBlock: "1.2rem" }}>
-        Parece que você tentou acessar uma página
-        excluída ou não existente.
+    <main className="min-h-screen flex flex-col justify-center items-center px-4 text-center">
+      <NextImage
+        src="/wassup-logo-404.svg"
+        alt="logo"
+        width={120}
+        height={120}
+      />
+
+      <h1 className="text-brand text-2xl md:text-4xl lg:text-5xl font-bold">
+        Ops! Página não encontrada
+      </h1>
+      <p className="text-light-txt-200 mt-4 text-sm  lg:text-lg">
+        Parece que você tentou acessar uma página que não existe
+        ou foi excluída.
       </p>
 
       <button
-        onClick={() => router.push("/chat")}
-        className="animated-bg"
-        style={{ paddingInline: "1.2rem", height: "3.5rem" }}>
-        voltar ao menu principal
+        className="bg-brand rounded-2xl mt-4 py-2 px-4 hover:bg-brand-hover transition-colors"
+        onClick={() =>router.push("/")}
+      >
+        Voltar ao menu principal
       </button>
-
-    </Box>
+    </main>
   );
 }
