@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "hooks/useAuth";
 
@@ -11,7 +11,11 @@ import { SignTitle } from "./SignTitle";
 import { NextImage } from "components/Next/Image";
 import { SubmitButton } from "./SubmitButton";
 
-export function SignTypeToggle() {
+interface Props {
+  setIsEmailModalOpened: Dispatch<SetStateAction<boolean>>
+}
+
+export function SignTypeToggle({setIsEmailModalOpened}:Props) {
   const auth = useAuth();
   const router = useRouter();
   const [sign, setSign] = useState<"login" | "signUp">("login");
@@ -42,6 +46,7 @@ export function SignTypeToggle() {
         if (isSignInDone) {
           setOnLoading(false);
           router.push("/chat");
+          setIsEmailModalOpened(true);
         }
       });
 
@@ -63,6 +68,7 @@ export function SignTypeToggle() {
         if (isSignUpDone) {
           setSign("login");
           setOnLoading(false);
+          setIsEmailModalOpened(true);
         }
       });
   }
