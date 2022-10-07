@@ -1,5 +1,4 @@
 import { PaperPlaneTilt } from "phosphor-react";
-import theme from "assets/theme/index.json";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { supabase } from "utils/supabaseClient";
 import { useDatabase } from "hooks/useDatabase";
@@ -36,7 +35,7 @@ export function SendMessageForm() {
         className="block bg-dark-bg-300 h-[48px] max-w-[720px] w-3/4 rounded-[32px] px-4 resize-none" 
       />
       <button className="rounded-full bg-brand w-12 h-12 flex items-center justify-center hover:bg-brand-hover">
-        <PaperPlaneTilt size={32} color={theme.colors.input} weight="fill" />
+        <PaperPlaneTilt size={32} className="text-light-txt-100" weight="fill" />
       </button>
     </form>
   );
