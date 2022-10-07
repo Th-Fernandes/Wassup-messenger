@@ -97,7 +97,11 @@ export function SignTypeToggle() {
           />
         </div>
 
-        <SubmitButton />
+        <SubmitButton 
+          onLoading={onLoading} 
+          sign={sign} 
+          inputData={inputData}
+        />
 
         <FooterSignMessage
           changeSignType={setSign}
