@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useRouter } from "next/router";
-import { FooterSignMessage } from "./FooterSignMessage";
-import { Loading } from "components/Loading";
-import { InputContainer } from "components/InputContainer";
-import illustration from "assets/images/index-demonstration.png";
 import { useAuth } from "hooks/useAuth";
+
+import { InputContainer } from "components/InputContainer";
+import { FooterSignMessage } from "./FooterSignMessage";
+
+import illustration from "assets/images/index-demonstration.png";
+import { SignErrorMessage } from "./SignErrorMessage";
+import { SignTitle } from "./SignTitle";
+import { NextImage } from "components/Next/Image";
+import { SubmitButton } from "./SubmitButton";
 
 export function SignTypeToggle() {
   const auth = useAuth();
@@ -14,9 +19,14 @@ export function SignTypeToggle() {
   const [onLoading, setOnLoading] = useState(false);
   const [authError, setAuthError] = useState(null);
 
-  function handleGetInput(input, dataType:"username" | "password" | "email") {
+  function handleGetInput(input, dataType: "username" | "password" | "email") {
     const userData = input.target.value;
     setInputData(latestState => ({ ...latestState, [dataType]: userData }));
+  }
+
+  function handleSetSignAction(event:FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    sign == "login" ? handleSignIn() : handleSignUp();
   }
 
   async function handleSignIn() {
@@ -61,27 +71,11 @@ export function SignTypeToggle() {
   return (
     <form
       className="grow py-32 bg-dark-bg-400 flex flex-col items-center justify-between"
-      onSubmit={(event) => {
-        event.preventDefault();
-        sign == "login" ? handleSignIn() : handleSignUp();
-      }}
+      onSubmit={(event) => handleSetSignAction(event)}
     >
       <fieldset className="w-[90%] max-w-[350px] mx-auto">
-        <legend className="text-light-txt-100 text-5xl font-bold text-center mb-4">
-          {
-            onLoading
-              ? <Loading />
-              : sign === "login"
-                ? "LOGIN"
-                : "CRIAR CONTA"
-          }
-        </legend>
-
-        {authError &&
-          <span className="text-error text-center block mb-2">
-            {authError}
-          </span>
-        }
+        <SignTitle onLoading={onLoading} sign={sign} />
+        <SignErrorMessage authError={authError} />
 
         <div className="flex flex-col gap-4">
           {
@@ -94,6 +88,7 @@ export function SignTypeToggle() {
           <InputContainer
             onChange={el => handleGetInput(el, "email")}
             label="E-mail"
+            type="email"
           />
           <InputContainer
             onChange={el => handleGetInput(el, "password")}
@@ -102,12 +97,7 @@ export function SignTypeToggle() {
           />
         </div>
 
-        <button
-          type="submit"
-          className="w-full bg-brand rounded-2xl h-[45px] mt-8 text-light-txt-100 font-medium text-lg"
-        >
-          Entrar
-        </button>
+        <SubmitButton />
 
         <FooterSignMessage
           changeSignType={setSign}
@@ -115,7 +105,12 @@ export function SignTypeToggle() {
         />
       </fieldset>
 
-      <img src={illustration.src} alt="demonstration" />
+      <NextImage 
+        src={illustration.src}
+        alt="demonstration"
+        width={350}
+        height={212}
+      />
     </form>
   );
 }
