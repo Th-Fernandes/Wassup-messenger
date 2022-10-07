@@ -2,66 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  --purple-primary: #6636f1;
-  --white-100: #FFFFFF;
-}
-
-
 body {
-  background: linear-gradient(159deg, rgba(15,15,15,1) 0%, rgba(34,42,104,1) 100%);
+ background: #200f4f;
 }
 
-::selection:not(img)   {
-  background-color: var(--purple-primary);
-  color: var(--white-100)
-}
 
-img::selection {
-  background: none;
-  color: transparent;
-}
-
-ul {
-  list-style-type: none;
-}
-/* ================= */
-/* @keyframes fadeIn {
-  from {
-    opacity: 0;
-    visibility: hidden;
-  }
-  to {
-    opacity: 1;
-    visibility: visible;
-  }
-}
-
-.animated-bg {
-  background: linear-gradient(
-      to right, var(--purple-primary),
-      #fd1d1d, #fcb045);
-      background-size: 400% 400%;
-      animation: gradientBg 8s infinite ease-in-out;
-}
-
-@keyframes gradientBg {
-  0%{
-    background-position: 0 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0 50%;
-  }
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
