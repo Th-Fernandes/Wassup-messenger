@@ -1,9 +1,9 @@
-import {  HTMLInputTypeAttribute} from "react";
+import {  ChangeEventHandler, HTMLInputTypeAttribute} from "react";
 
 interface Props {
   label: string;
   type?: HTMLInputTypeAttribute;
-  onChange: () => void
+  onChange: ChangeEventHandler<HTMLInputElement>;
 }
 
 export function InputContainer({label, type="text", onChange}:Props) {

@@ -6,17 +6,15 @@ import { InputContainer } from "components/InputContainer";
 import illustration from "assets/images/index-demonstration.png";
 import { useAuth } from "hooks/useAuth";
 
-
-
 export function SignTypeToggle() {
   const auth = useAuth();
   const router = useRouter();
-  const [sign, setSign] = useState("login");
+  const [sign, setSign] = useState<"login" | "signUp">("login");
   const [inputData, setInputData] = useState({ email: "", password: "", username: "" });
   const [onLoading, setOnLoading] = useState(false);
   const [authError, setAuthError] = useState(null);
 
-  function handleGetInput(input, dataType) {
+  function handleGetInput(input, dataType:"username" | "password" | "email") {
     const userData = input.target.value;
     setInputData(latestState => ({ ...latestState, [dataType]: userData }));
   }

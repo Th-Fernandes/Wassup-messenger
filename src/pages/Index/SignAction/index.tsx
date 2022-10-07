@@ -10,7 +10,7 @@ export function SignAction() {
     <>
       {emailModal && <EmailConfirm emailModal={setEmailModal}/>}
       <AsideInfo />
-      <SignTypeToggle emailModal={setEmailModal} />
+      <SignTypeToggle/>
     </>
   );
 }
