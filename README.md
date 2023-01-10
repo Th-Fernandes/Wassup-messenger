@@ -6,13 +6,28 @@
 
 <p> 
   Wassup Messenger é um mensageiro multiplataforma (mobile e web). Através dele
-  é possível se conectar ao chat da plataforma e conversar com os usuários da
-  plataforma, basta apenas possuir uma conta. Confira a versão mobile <a href="https://github.com/Th-Fernandes/Wassup-messenger-mobile">aqui</a>
+  é possível se conectar ao chat da plataforma e conversar com diversos usuários simultâneamente, o único requisito é possuir uma conta. Confira a versão mobile <a href="https://github.com/Th-Fernandes/Wassup-messenger-mobile">aqui</a>
 </p>
 
-<p align="center">
+<div>
+  <h2>Como utilizar</h2>
+  <ol>
+    <li>Acesse a aplicação <a href="https://wassup-messenger.vercel.app/">clicando aqui</a></li>
+    <li>clique em "Não possui conta? clique aqui para criar" para abrir o formulário de cadastro</li>
+    <li>informe nome de usuário, email e senha no formulário e após confirme o cadastro no email informado.</li>
+    <li>Retorne na  <a href="https://wassup-messenger.vercel.app/">url principal da aplicação</a> e informe o email e senha cadastrados</li>
+  </ol>
+</div>
+
+<div>
+  <h2>Design no figma</h2>
+
+  <p>A Ui desse projeto foi desenhada do zero. Para Acessar seu desenvolvimento no figma, basta <a href="https://www.figma.com/file/HV7Z85nESpCqSTltB00Xc9/wassup-messenger?node-id=0%3A1&t=M62eBpRaUwla8J9F-1">acessar esse link.</a></p>
+
+  <p align="center">
   <img src="./.github/readme-demonstration.png" />
 </p>
+</div>
 
 <div>
   <h2>Ferramentas utilizadas (versão Web)</h2>
@@ -25,14 +40,15 @@
   </ul>
 </div>
 
-<div>
-  <h2>Como utilizar</h2>
+<div> 
+  <h2>Instalação</h2>
+  <p>Caso prefira fazer a instalação local ao invés de acessar a versão com deploy, basta seguir a sequência no terminal:</p>
   <ol>
-    <li>Cadastre seu e-mail</li>
-    <li>Confirme seu cadastro com e-mail que será enviado ao mesmo</li>
-    <li>Envie e receba mensagens em tempo real de outros usuários</li>
+    <li><code>git clone git@github.com:Th-Fernandes/Wassup-messenger.git</code></li>
+    <li><code>yarn install</code></li>
+    <li><code>yarn dev</code></li>
   </ol>
-</div>
+</div> 
 
 ## Autor
 
