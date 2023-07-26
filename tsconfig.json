@@ -18,13 +18,22 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "strictNullChecks": true
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "src/components/SignAction/SignTypeToggle/index.tsx", "src/components/SignAction/index.jsx"  ],
+    "**/*.tsx",
+    "src/components/SignAction/SignTypeToggle/index.tsx",
+    "src/components/SignAction/index.jsx",
+    ".next/types/**/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ]
