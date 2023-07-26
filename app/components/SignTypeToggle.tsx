@@ -1,15 +1,16 @@
-import { Dispatch, FormEvent, SetStateAction, useState } from "react";
-import { useRouter } from "next/router";
-import { useAuth } from "hooks/useAuth";
-
-import { InputContainer } from "components/InputContainer";
-import { FooterSignMessage } from "./FooterSignMessage";
-
 import illustration from "assets/images/index-demonstration.png";
-import { SignErrorMessage } from "./SignErrorMessage";
-import { SignTitle } from "./SignTitle";
+
+import { useAuth } from "hooks/useAuth";
+import { useState, FormEvent, Dispatch, SetStateAction } from "react";
+import { useRouter } from "next/navigation";
+
 import { NextImage } from "components/Next/Image";
+import { InputContainer } from "components/InputContainer";
+
+import { SignTitle } from "./SignTitle";
+import { SignErrorMessage } from "./SignErrorMessage";
 import { SubmitButton } from "./SubmitButton";
+import { FooterSignMessage } from "./FooterSignMessage";
 
 interface Props {
   setIsEmailModalOpened: Dispatch<SetStateAction<boolean>>

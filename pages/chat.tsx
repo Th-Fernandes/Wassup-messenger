@@ -29,7 +29,8 @@ export default function Home() {
 
   return (
     <main>
-      <DefaultDialog recieve={<Chat />}>
+      <Chat />
+      <DefaultDialog>
         <div className="bg-light-txt-100 rounded-2xl min-h-[200px] p-4 flex flex-col justify-between">
           <div className="text-dark-bg-400">
             <h2 className="text-2xl text-center mb-4">Tem certeza que deseja sair?</h2>

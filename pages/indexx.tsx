@@ -8,8 +8,8 @@ export default function LoginPage() {
 
   return (
     <main>
+      <SignActionPage setIsEmailModalOpened={setIsEmailModalOpened}/>
       <Dialog.Root onOpenChange={setIsEmailModalOpened} open={isEmailModalOpened}>
-        <SignActionPage setIsEmailModalOpened={setIsEmailModalOpened}/>
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0 z-20 bg-dark-bg-300/50 flex items-center justify-center">
             <Dialog.Content>
