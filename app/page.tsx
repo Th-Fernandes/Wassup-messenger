@@ -2,7 +2,7 @@
 
 import * as Dialog from "@radix-ui/react-dialog";
 import { AsideInfo } from "./components/AsideInfo";
-import { SignTypeToggle } from "./components/SignTypeToggle";
+import { SignActionForm } from "./components/SignActionForm";
 import { useState } from "react";
 
 export default function LoginPage() {
@@ -13,7 +13,7 @@ export default function LoginPage() {
       <Dialog.Root onOpenChange={setIsEmailModalOpened} open={isEmailModalOpened}>
         <section className="flex max-w-[1440px] h-screen mx-auto">
           <AsideInfo />
-          <SignTypeToggle setIsEmailModalOpened={setIsEmailModalOpened}/>
+          <SignActionForm setIsEmailModalOpened={setIsEmailModalOpened}/>
         </section>
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0 z-20 bg-dark-bg-300/50 flex items-center justify-center">

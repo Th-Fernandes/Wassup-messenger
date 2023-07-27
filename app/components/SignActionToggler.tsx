@@ -5,7 +5,7 @@ interface Props {
   selectedSignType: "login" | "signUp"
 }
 
-export function FooterSignMessage({ changeSignType, selectedSignType }: Props) {
+export function SignActionToggler({ changeSignType, selectedSignType }: Props) {
   function handleChangeSignAction() {
     if(selectedSignType === "login") changeSignType("signUp");
     if(selectedSignType === "signUp") changeSignType("login");
