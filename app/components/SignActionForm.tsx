@@ -8,7 +8,6 @@ import { useInputsValues } from "./hooks/useInputsValues";
 
 import { SignTitle } from "./SignTitle";
 import { SignErrorMessage } from "./SignErrorMessage";
-import { useToggleSignAction } from "./hooks/useToggleSignAction";
 import { SubmitButton } from "./SubmitButton";
 import { SignActionToggler } from "./SignActionToggler";
 import { InputsContainer } from "./InputsContainer";
@@ -19,12 +18,12 @@ interface Props {
 
 export function SignActionForm ({setIsEmailModalOpened}:Props) {
   const { inputData, handleGetInput } = useInputsValues();
-  const { sign, setSign } = useToggleSignAction();
-  
   const {
     handleSetSignAction,
     onLoading,
     authError,
+    sign,
+    setSign
   } = useAuthHandler(setIsEmailModalOpened , inputData.email, inputData.password, inputData.username);
 
 
