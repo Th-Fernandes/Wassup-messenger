@@ -1,12 +1,12 @@
 import { InputContainer } from "components/InputContainer";
-import { useInputsValues } from "./hooks/useInputsValues";
 
 interface Props {
-  sign: string
+  sign: string,
+  // eslint-disable-next-line no-unused-vars
+  handleGetInput(input: any, dataType: "email" | "password" | "username"): void
 }
 
-export function InputsContainer({sign}:Props) {
-  const { handleGetInput } = useInputsValues();
+export function InputsContainer({sign, handleGetInput}:Props) {
 
   return (
     <div className="flex flex-col gap-4">

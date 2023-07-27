@@ -18,7 +18,7 @@ interface Props {
 }
 
 export function SignActionForm ({setIsEmailModalOpened}:Props) {
-  const { inputData } = useInputsValues();
+  const { inputData, handleGetInput } = useInputsValues();
   const { sign, setSign } = useToggleSignAction();
   
   const {
@@ -37,7 +37,7 @@ export function SignActionForm ({setIsEmailModalOpened}:Props) {
         <SignTitle onLoading={onLoading} sign={sign} />
         <SignErrorMessage authError={authError} />
 
-        <InputsContainer sign={sign} />
+        <InputsContainer sign={sign} handleGetInput={handleGetInput} />
 
         <SubmitButton 
           onLoading={onLoading} 
