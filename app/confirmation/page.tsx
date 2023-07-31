@@ -1,5 +1,7 @@
+"use client";
+
 import * as Dialog from "@radix-ui/react-dialog";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function Confirmation() {
   const router = useRouter();
@@ -32,3 +34,26 @@ export default function Confirmation() {
     </main>
   );
 }
+
+// export function Y() {
+//   return (
+//     <Dialog.Root open>
+//       <Dialog.Portal>
+//         <Dialog.Overlay/>
+//         <Dialog.Content>
+//           <Dialog.Title>Cadastro feito!</Dialog.Title>
+//           <Dialog.Description>
+//             Tudo certo! o acesso a sua conta já foi liberado. Venha experimentar
+//             o mensageiro roxo :)
+//           </Dialog.Description>
+
+//           <Dialog.Close
+//             onClick={() => router.push("/")} 
+//             className="h-10 w-[200px]  rounded-lg bg-brand">
+//                   Utilizar o App
+//           </Dialog.Close>
+//         </Dialog.Content>
+//       </Dialog.Portal>
+//     </Dialog.Root>
+//   );
+// }
