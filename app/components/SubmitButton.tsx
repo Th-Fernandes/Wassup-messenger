@@ -14,7 +14,7 @@ export function SubmitButton({onLoading, sign, inputData}:Props) {
   function checkIfInputsAreEmpty() {
     if(inputData.email.length === 0 ) return true;
     if(inputData.password.length === 0 ) return true;
-    if(inputData.username.length === 0 && sign == "signUp" ) return true;
+    if(inputData?.username?.length === 0 && sign == "signUp" ) return true;
   }
 
   function handleChangeButtonMessage() {
