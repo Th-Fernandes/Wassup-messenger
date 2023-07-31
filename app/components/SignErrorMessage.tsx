@@ -1,5 +1,5 @@
 interface Props {
-  authError: string;
+  authError: string | null | undefined;
 }
 
 export function SignErrorMessage({authError}:Props) {
