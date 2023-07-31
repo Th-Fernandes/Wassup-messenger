@@ -1,7 +1,9 @@
-import { NextImage } from "components/Next/Image";
-import { useRouter } from "next/router";
+"use client";
 
-export default function Error404() {
+import { NextImage } from "components/Next/Image";
+import { useRouter } from "next/navigation";
+
+export default function NotFoundPage() {
   const router = useRouter();
 
   return (
