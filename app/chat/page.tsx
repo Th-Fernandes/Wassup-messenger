@@ -1,6 +1,8 @@
+"use client";
+
 import { useEffect } from "react";
-import { useRouter } from "next/router";
-import { Chat } from "pages/Chat";
+import { useRouter } from "next/navigation";
+import { Chat } from "./components/chat";
 import * as Dialog from "@radix-ui/react-dialog";
 import { supabase } from "utils/supabaseClient";
 import { useAuth } from "hooks/useAuth";
@@ -29,8 +31,7 @@ export default function Home() {
 
   return (
     <main>
-      <Chat />
-      <DefaultDialog>
+      <DefaultDialog recieve={<Chat />}>
         <div className="bg-light-txt-100 rounded-2xl min-h-[200px] p-4 flex flex-col justify-between">
           <div className="text-dark-bg-400">
             <h2 className="text-2xl text-center mb-4">Tem certeza que deseja sair?</h2>
