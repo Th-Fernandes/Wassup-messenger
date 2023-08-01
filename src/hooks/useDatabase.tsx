@@ -9,7 +9,7 @@ export function useDatabase() {
           .from<MessagesTable>(table)
           .select("*");
 
-        if (error) return errorHandler();
+        if (error && errorHandler) return errorHandler();
         return data ;
       }
     },
@@ -22,7 +22,7 @@ export function useDatabase() {
             .from(table)
             .insert(this.newRow);
   
-          if (error) return errorHandler();
+          if (error && errorHandler) return errorHandler();
           return true;
         }
       };
