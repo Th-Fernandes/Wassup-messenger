@@ -15,13 +15,15 @@ export function SendMessageForm() {
   function handleSubmitMessageToDatabase(event:FormEvent<HTMLFormElement | HTMLInputElement>) {
     event.preventDefault();
 
-    const {user} = supabase.auth.session();
+    const session = supabase.auth.session();
+    
+    if(session?.user) {
+      database
+        .insert({message, session_id: session.user.id, username: session.user.user_metadata.username })
+        .from("messages");
 
-    database
-      .insert({message, session_id: user.id, username: user.user_metadata.username })
-      .from("messages");
-
-    setMessage("");
+      setMessage("");
+    }
   }
 
   return (
