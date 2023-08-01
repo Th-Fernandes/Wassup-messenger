@@ -12,7 +12,7 @@ export function SignActionToggler({ changeSignType, selectedSignType }: Props) {
   }
 
   return (
-    <small className=" text-sm lg:text-base text-center block mt-4">
+    <small className=" text-sm lg:text-base text-center block mt-4 text-light-txt-100">
       {selectedSignType === "login" ? "Não" : "Já"} possui conta? 
       <span
         onClick={handleChangeSignAction}

@@ -5,7 +5,7 @@ interface Props {
 export function LogOutMessage({ username }:Props) {
   return (
     <li
-      style={{ marginBottom: "1.2rem", textAlign: "center", fontSize: "1.2rem" }}
+      className="text-light-txt-100 text-center text-base mb-4"
     >
       {username} saiu.
     </li>

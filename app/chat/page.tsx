@@ -32,8 +32,8 @@ export default function Home() {
   return (
     <main>
       <DefaultDialog recieve={<Chat />}>
-        <div className="bg-light-txt-100 rounded-2xl min-h-[200px] p-4 flex flex-col justify-between">
-          <div className="text-dark-bg-400">
+        <div className="bg-dark-bg-300 text-light-txt-100 rounded-2xl min-h-[200px] p-4 flex flex-col justify-between ">
+          <div>
             <h2 className="text-2xl text-center mb-4">Tem certeza que deseja sair?</h2>
             <p className="text-base">
               Você está prestes a desconectar de sua conta. É essa ação que deseja

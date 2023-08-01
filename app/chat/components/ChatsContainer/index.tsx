@@ -10,9 +10,9 @@ export function ChatsContainer() {
       <ul className="mt-14">
         <li className="h-24 border-brand-border border rounded-2xl ">
           <button className="flex items-center gap-3  text-left h-full w-full px-4">
-            <GlobeHemisphereEast size={64} weight="fill" />
+            <GlobeHemisphereEast size={64} weight="fill" className="text-light-txt-100" />
             <span>
-              <h2 className="text-lg">GlobalChat</h2>
+              <h2 className="text-lg text-light-txt-100">GlobalChat</h2>
               <p className="text-sm text-light-txt-200">Clique para participar</p>
             </span>
           </button>

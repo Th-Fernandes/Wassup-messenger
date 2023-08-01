@@ -29,12 +29,12 @@ export function SendMessageForm() {
   return (
     <form
       onSubmit={event => handleSubmitMessageToDatabase(event)}
-      className="w-full flex justify-center gap-4 overflow-hidden bg-dark-bg-400 flex-grow items-end absolute bottom-0 right-0 left-0"  >
+      className="w-full flex justify-center gap-4 overflow-hidden bg-dark-bg-400 flex-grow items-end absolute bottom-0 right-0 left-0 pt-2"  >
       <input
         onKeyPress={(event) => { if (event.key === "Enter") handleSubmitMessageToDatabase(event); }}
         onChange={element => handleGetMessageValue(element)}
         value={message}
-        className="block bg-dark-bg-300 h-[48px] max-w-[720px] w-3/4 rounded-[32px] px-4 resize-none" 
+        className="block bg-dark-bg-300 h-[48px] max-w-[720px] w-3/4 rounded-[32px] px-4 resize-none text-light-txt-100" 
       />
       <button className="rounded-full bg-brand w-12 h-12 flex items-center justify-center hover:bg-brand-hover">
         <PaperPlaneTilt size={32} className="text-light-txt-100" weight="fill" />
