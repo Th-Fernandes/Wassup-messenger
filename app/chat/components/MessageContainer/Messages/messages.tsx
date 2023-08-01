@@ -11,11 +11,11 @@ export function Messages() {
   const database = useDatabase();
   const auth = useAuth();
   const [messages, setMessages] = useState<MessagesTable[]>([]);
-  const [sessionId, setSessionId] = useState("");
+  const [sessionId, setSessionId] = useState<string | undefined>("");
 
   useEffect(() => {
-    const hasSession = auth.getSession() === null ? false : true;
-    if(hasSession) setSessionId(auth.getSession().user.id);
+    const session = auth.getSession();
+    setSessionId(session?.user?.id);
   }, []);
 
   useEffect(() => {
