@@ -1,10 +1,11 @@
 import illustration from "assets/images/index-demonstration.png";
 
-import { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, FormEvent, SetStateAction } from "react";
 import { NextImage } from "components/Next/Image";
 
-import { useAuthHandler } from "./hooks/useAuthHandler";
 import { useInputsValues } from "./hooks/useInputsValues";
+import { useAuth } from "hooks/useAuth";
+import { useToggleSignAction } from "./hooks/useToggleSignAction";
 
 import { SignTitle } from "./SignTitle";
 import { SignErrorMessage } from "./SignErrorMessage";
@@ -18,28 +19,44 @@ interface Props {
 
 export function SignActionForm ({setIsEmailModalOpened}:Props) {
   const { inputData, handleGetInput } = useInputsValues();
+  const { sign, setSign } = useToggleSignAction();
+
   const {
-    handleSetSignAction,
-    onLoading,
+    signIn,
+    signUp,
+    isSignActionLoading,
     authError,
-    sign,
-    setSign
-  } = useAuthHandler(setIsEmailModalOpened , inputData.email, inputData.password, inputData.username);
+  } = useAuth();
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    switch(sign) {
+    case "login": 
+      signIn(inputData.email, inputData.password);
+      break;
+    case "signUp": 
+      signUp(inputData.email, inputData.password, inputData.username);
+      setIsEmailModalOpened(true);
+      break;
+    }
+  }
+
 
 
   return (
     <form
       className="grow py-32 bg-dark-bg-400 flex flex-col items-center justify-between"
-      onSubmit={(event) => handleSetSignAction(event)}
+      onSubmit={handleSubmit}
     >
       <fieldset className="w-[90%] max-w-[350px] mx-auto">
-        <SignTitle onLoading={onLoading} sign={sign} />
+        <SignTitle onLoading={isSignActionLoading} sign={sign} />
         <SignErrorMessage authError={authError} />
 
         <InputsContainer sign={sign} handleGetInput={handleGetInput} />
 
         <SubmitButton 
-          onLoading={onLoading} 
+          onLoading={isSignActionLoading} 
           sign={sign} 
           inputData={inputData}
         />

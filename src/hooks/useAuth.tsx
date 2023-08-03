@@ -1,49 +1,74 @@
+import { ApiError } from "@supabase/supabase-js";
+import { useRouter } from "next/navigation";
+import React from "react"; 
 import { supabase } from "utils/supabaseClient";
 
 export function useAuth() {
-  return {
-    getSession() {
-      return supabase.auth.session();
-    },
+  const router = useRouter();
+  const [authError, setAuthError] = React.useState<ApiError | null>(null);
+  const [isSignActionLoading, setIsSignActionLoading] = React.useState<boolean>(false);
 
-    async signIn(email:string, password:string, handleError:any){
-      const { error } = await supabase.auth.signIn({
-        email,
-        password,
-      });
+  function cleanPreviousAuthError() {
+    setAuthError(null);
+  }
 
-      if(error) {
-        handleError(error);
-        return false;
-      }
-      return true;
-    },
+  function getSession() {
+    return supabase.auth.session();
+  }
 
-    async signUp(email:string, password:string, username:string, handleError:any) {
-      const { error } = await supabase.auth.signUp(
-        {
-          email,
-          password,
-        },
-        {
-          data: {
-            username
-          }
-        }
-      );
+  async function signIn(email:string, password:string){
+    cleanPreviousAuthError();
+    setIsSignActionLoading(true);
 
-      if(error) {
-        handleError(error);
-        return false;
-      }
-      return true;
-    },
+    const { error } = await supabase.auth.signIn({
+      email,
+      password,
+    });
 
-    async signOut() {
-      const { error } = await supabase.auth.signOut();
-
-      if(error) return error;
-      return true;
+    if (error) {
+      setAuthError(error);
+      setIsSignActionLoading(false);
+      return;
     }
+     
+    router.push("/chat");
+    setIsSignActionLoading(false);
+  }
+
+  async function signUp(email:string, password:string, username:string) {
+    cleanPreviousAuthError();
+    setIsSignActionLoading(true);
+
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+    },
+    {
+      data: {
+        username
+      }
+    });
+
+    if(error) setAuthError(error);
+    setIsSignActionLoading(false);
+  
+  }
+
+  async function signOut() {
+    const { error } = await supabase.auth.signOut();
+
+    if(error) return error;
+    return true;
+  }
+
+  const actions = {
+    signIn,
+    signOut,
+    signUp,
+    getSession,
+    authError: authError?.message,
+    isSignActionLoading
   };
+
+  return actions; 
 }

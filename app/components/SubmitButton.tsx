@@ -11,24 +11,37 @@ interface Props {
 }
 
 export function SubmitButton({onLoading, sign, inputData}:Props) {
-  function checkIfInputsAreEmpty() {
-    if(inputData.email.length === 0 ) return true;
-    if(inputData.password.length === 0 ) return true;
-    if(inputData?.username?.length === 0 && sign == "signUp" ) return true;
+  function hasEmptyInputs(): boolean {
+    const inputsValue = Object.values(getInputsBySign());
+    const emptyValues = inputsValue.filter(input => input.length === 0);
+    const hasEmptyValues = emptyValues.length != 0;
+
+    return hasEmptyValues;
   }
 
-  function handleChangeButtonMessage() {
-    if( sign === "login") return "Entrar";
-    if( sign === "signUp") return "Criar conta";
+  function getInputsBySign() {
+    const inputs = {
+      signUp: inputData,
+      login: {email: inputData.email, password: inputData.password}
+    };
+    return inputs[sign];
   }
 
+  function changeTextContentBySign() {
+    const textContent = {
+      login: "entrar",
+      signUp: "Criar conta"
+    };
+
+    return textContent[sign];
+  }
   return (
     <button
-      disabled={checkIfInputsAreEmpty()}
+      disabled={hasEmptyInputs()}
       type="submit"
-      className={`w-full ${checkIfInputsAreEmpty() ? "bg-light-txt-200 cursor-not-allowed" : "bg-brand"}  rounded-2xl h-[45px] mt-8 text-light-txt-100 font-medium text-lg flex justify-center items-center`}
+      className={`w-full ${hasEmptyInputs() ? "bg-light-txt-200 cursor-not-allowed" : "bg-brand"}  rounded-2xl h-[45px] mt-8 text-light-txt-100 font-medium text-lg flex justify-center items-center`}
     >
-      {onLoading ? <Loading/> : handleChangeButtonMessage()}
+      {onLoading ? <Loading/> : changeTextContentBySign()}
     </button>
   );
 }
