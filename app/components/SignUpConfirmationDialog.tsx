@@ -1,9 +1,9 @@
 import {Dialog} from "components/radix/Dialog";
 import { useContext } from "react";
-import { ThemeContext } from "../page";
+import { signUpModalContext } from "../signUpModalProvider";
 
 export function SignUpConfirmationDialog() {
-  const theme = useContext(ThemeContext);
+  const theme = useContext(signUpModalContext);
 
   return (
     <Dialog.Basis open={theme?.isEmailModalOpened} onOpenChange={theme?.setIsEmailModalOpened}>

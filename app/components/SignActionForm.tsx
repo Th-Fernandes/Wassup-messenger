@@ -12,7 +12,7 @@ import { SignErrorMessage } from "./SignErrorMessage";
 import { SubmitButton } from "./SubmitButton";
 import { SignActionToggler } from "./SignActionToggler";
 import { InputsContainer } from "./InputsContainer";
-import { ThemeContext } from "../page";
+import { signUpModalContext } from "../signUpModalProvider";
 
 
 export function SignActionForm () {
@@ -26,7 +26,7 @@ export function SignActionForm () {
     authError,
   } = useAuth();
 
-  const theme = useContext(ThemeContext);
+  const theme = useContext(signUpModalContext);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
