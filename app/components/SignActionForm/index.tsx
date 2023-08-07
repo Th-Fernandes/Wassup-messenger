@@ -3,16 +3,16 @@ import illustration from "assets/images/index-demonstration.png";
 import React, { FormEvent, useContext } from "react";
 import { NextImage } from "components/Next/Image";
 
-import { useInputsValues } from "./hooks/useInputsValues";
+import { useInputsValues } from "../hooks/useInputsValues";
 import { useAuth } from "hooks/useAuth";
-import { useToggleSignAction } from "./hooks/useToggleSignAction";
+import { useToggleSignAction } from "../hooks/useToggleSignAction";
 
 import { SignTitle } from "./SignTitle";
 import { SignErrorMessage } from "./SignErrorMessage";
 import { SubmitButton } from "./SubmitButton";
 import { SignActionToggler } from "./SignActionToggler";
 import { InputsContainer } from "./InputsContainer";
-import { signUpModalContext } from "../signUpModalProvider";
+import { signUpModalContext } from "../../signUpModalProvider";
 
 
 export function SignActionForm () {
@@ -41,8 +41,6 @@ export function SignActionForm () {
       break;
     }
   }
-
-
 
   return (
     <form
