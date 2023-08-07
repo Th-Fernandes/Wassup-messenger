@@ -3,20 +3,31 @@
 
 import { AsideInfo } from "./components/AsideInfo";
 import { SignActionForm } from "./components/SignActionForm";
-import { useState } from "react";
+import { createContext, useState } from "react";
 import { SignUpConfirmationDialog } from "./components/SignUpConfirmationDialog";
+
+export const ThemeContext = createContext<Theme | null>(null);
+
+interface Theme {
+  isEmailModalOpened: any,
+  setIsEmailModalOpened: any
+}
 
 export default function LoginPage() {
   const [isEmailModalOpened, setIsEmailModalOpened] = useState<boolean>(false);
 
   return (
     <main>
-      <SignUpConfirmationDialog setIsEmailModalOpened={setIsEmailModalOpened} isEmailModalOpened={isEmailModalOpened}>
+      <ThemeContext.Provider value={{
+        isEmailModalOpened,
+        setIsEmailModalOpened
+      }}>
         <section className="flex max-w-[1440px] h-screen mx-auto">
           <AsideInfo />
-          <SignActionForm setIsEmailModalOpened={setIsEmailModalOpened}/>
+          <SignActionForm />
         </section>
-      </SignUpConfirmationDialog>
+        <SignUpConfirmationDialog/>
+      </ThemeContext.Provider>
     </main>
   );
 }

@@ -1,6 +1,6 @@
 import { DotsThreeCircleVertical, Sun, UserCircle } from "phosphor-react";
 import { useState } from "react";
-import * as Dialog from "@radix-ui/react-dialog";
+import { Dialog } from "components/radix/Dialog";
 
 export function Menu() {
   const [isOptionsOpened, setIsOptionsOpened] = useState<boolean>(false);

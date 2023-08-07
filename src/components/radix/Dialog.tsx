@@ -1,22 +1,25 @@
-import * as Dialog from "@radix-ui/react-dialog";
-import { ReactNode } from "react";
+import * as PrimitiveDialog from "@radix-ui/react-dialog";
+import {  ReactNode } from "react";
 
-interface Props {
-  recieve: ReactNode;
-  children: ReactNode;
+interface Props extends PrimitiveDialog.DialogProps {
+  children: ReactNode,
 }
 
-export function DefaultDialog({recieve, children}:Props) {
+export const Dialog = {
+  Basis: DialogBasis,
+  Trigger: PrimitiveDialog.Trigger,
+  Content: PrimitiveDialog.Content,
+  Close: PrimitiveDialog.Close
+};
+
+function DialogBasis({children, open}: Props) {
   return (
-    <Dialog.Root>
-      {recieve}
-      <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-20 bg-dark-bg-300/50 flex items-center justify-center">
-          <Dialog.Content>
-            {children}
-          </Dialog.Content>
-        </Dialog.Overlay>
-      </Dialog.Portal>
-    </Dialog.Root>
+    <PrimitiveDialog.Root open={open}>
+      <PrimitiveDialog.Portal>
+        <PrimitiveDialog.Overlay className="fixed inset-0 z-20 bg-dark-bg-300/50 flex items-center justify-center">
+          {children}
+        </PrimitiveDialog.Overlay>
+      </PrimitiveDialog.Portal>
+    </PrimitiveDialog.Root>
   );
 }

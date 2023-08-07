@@ -1,6 +1,6 @@
 import illustration from "assets/images/index-demonstration.png";
 
-import React, { Dispatch, FormEvent, SetStateAction } from "react";
+import React, { FormEvent, useContext } from "react";
 import { NextImage } from "components/Next/Image";
 
 import { useInputsValues } from "./hooks/useInputsValues";
@@ -12,12 +12,10 @@ import { SignErrorMessage } from "./SignErrorMessage";
 import { SubmitButton } from "./SubmitButton";
 import { SignActionToggler } from "./SignActionToggler";
 import { InputsContainer } from "./InputsContainer";
+import { ThemeContext } from "../page";
 
-interface Props {
-  setIsEmailModalOpened: Dispatch<SetStateAction<boolean>>
-}
 
-export function SignActionForm ({setIsEmailModalOpened}:Props) {
+export function SignActionForm () {
   const { inputData, handleGetInput } = useInputsValues();
   const { sign, setSign } = useToggleSignAction();
 
@@ -28,6 +26,8 @@ export function SignActionForm ({setIsEmailModalOpened}:Props) {
     authError,
   } = useAuth();
 
+  const theme = useContext(ThemeContext);
+
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
@@ -37,7 +37,7 @@ export function SignActionForm ({setIsEmailModalOpened}:Props) {
       break;
     case "signUp": 
       signUp(inputData.email, inputData.password, inputData.username);
-      setIsEmailModalOpened(true);
+      theme?.setIsEmailModalOpened(true);
       break;
     }
   }
