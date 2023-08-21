@@ -1,6 +1,6 @@
 import {Dialog} from "components/radix/Dialog";
 import { useContext } from "react";
-import { signUpModalContext } from "../signUpModalProvider";
+import { signUpModalContext } from "../_providers/signUpModalProvider";
 
 export function SignUpConfirmationDialog() {
   const theme = useContext(signUpModalContext);
