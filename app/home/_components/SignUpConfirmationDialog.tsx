@@ -1,4 +1,4 @@
-import {Dialog} from "components/radix/Dialog";
+import {Dialog} from "../../_components/radix/Dialog";
 import { useContext } from "react";
 import { signUpModalContext } from "../_providers/signUpModalProvider";
 

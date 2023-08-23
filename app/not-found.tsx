@@ -1,6 +1,6 @@
 "use client";
 
-import { NextImage } from "components/Next/Image";
+import { NextImage } from "./_components/Next/Image";
 import { useRouter } from "next/navigation";
 
 export default function NotFoundPage() {

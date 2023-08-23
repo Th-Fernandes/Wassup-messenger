@@ -1,7 +1,7 @@
 import illustration from "../../../_assets/images/index-demonstration.png";
 
 import React, { FormEvent, useContext } from "react";
-import { NextImage } from "components/Next/Image";
+import { NextImage } from "../../../_components/Next/Image";
 
 import { useInputsValues } from "../../_hooks/useInputsValues";
 import { useAuth } from "../../../_hooks/useAuth";
