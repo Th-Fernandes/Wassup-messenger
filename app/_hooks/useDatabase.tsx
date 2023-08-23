@@ -1,5 +1,5 @@
 import { MessagesTable } from "../_types/MessagesTable";
-import { supabase } from "utils/supabaseClient";
+import { supabase } from "../_utils/supabaseClient";
 
 export function useDatabase() {
   return {

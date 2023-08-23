@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { supabase } from "utils/supabaseClient";
+import { supabase } from "../../../../_utils/supabaseClient";
 import ReceivedMessage from "./ReceivedMessage";
 import SendedMessage from "./SendedMessage";
 import { LogOutMessage } from "./LogOutMessage";

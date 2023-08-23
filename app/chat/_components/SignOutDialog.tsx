@@ -1,6 +1,6 @@
 import { Dialog } from "components/radix/Dialog";
 import { useRouter } from "next/navigation";
-import { supabase } from "utils/supabaseClient";
+import { supabase } from "../../_utils/supabaseClient";
 
 
 export function SignOutDialog() {
