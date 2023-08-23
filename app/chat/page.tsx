@@ -1,16 +1,15 @@
 "use client";
 
-import { Chat } from "./components/chat";
-import { SignOutDialog } from "./components/SignOutDialog";
-import { useRedirectNonAuthorizedUser } from "./hooks/useRedirectNonAuthorizedUser";
+import { ChatPage } from "./_components/chat";
+import { SignOutDialog } from "./_components/SignOutDialog";
+import { useRedirectNonAuthorizedUser } from "./_hooks/useRedirectNonAuthorizedUser";
 
-
-export default function Home() {
+export default function HomePage() {
   useRedirectNonAuthorizedUser();
 
   return (
     <main>
-      <Chat />
+      <ChatPage />
       <SignOutDialog />
     </main>
   );

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "utils/supabaseClient";
-import ReceivedMessage from "./ReceivedMessage/ReceivedMessage";
-import SendedMessage from "./SendedMessage/SendedMessage";
+import ReceivedMessage from "./ReceivedMessage";
+import SendedMessage from "./SendedMessage";
 import { LogOutMessage } from "./LogOutMessage";
 import { useDatabase } from "hooks/useDatabase";
 import { MessagesTable } from "types/MessagesTable";

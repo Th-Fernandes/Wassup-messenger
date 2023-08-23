@@ -1,9 +1,9 @@
 import { ChatsContainer } from "./ChatsContainer";
 import { ChatHeader } from "./MessageContainer/ChatHeader";
-import { Messages } from "./MessageContainer/Messages/messages";
+import { Messages } from "./MessageContainer/Messages";
 import { SendMessageForm } from "./MessageContainer/SendMessageForm";
 
-export function Chat() {
+export function ChatPage() {
   return (
     <section className="h-screen flex max-w-[1440px] mx-auto">
       <ChatsContainer />
