@@ -4,7 +4,7 @@ import ReceivedMessage from "./ReceivedMessage";
 import SendedMessage from "./SendedMessage";
 import { LogOutMessage } from "./LogOutMessage";
 import { useDatabase } from "../../../../_hooks/useDatabase";
-import { MessagesTable } from "types/MessagesTable";
+import { MessagesTable } from "../../../../_types/MessagesTable";
 import { useAuth } from "../../../../_hooks/useAuth";
 
 export function Messages() {
