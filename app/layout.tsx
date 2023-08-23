@@ -1,4 +1,4 @@
-import "assets/styles/global.css";
+import "./_assets/styles/global.css";
 import { Roboto } from "next/font/google";
 import React from "react";
 import { Metadata } from "next";
