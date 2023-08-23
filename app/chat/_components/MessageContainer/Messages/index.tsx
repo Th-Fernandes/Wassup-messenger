@@ -3,9 +3,9 @@ import { supabase } from "utils/supabaseClient";
 import ReceivedMessage from "./ReceivedMessage";
 import SendedMessage from "./SendedMessage";
 import { LogOutMessage } from "./LogOutMessage";
-import { useDatabase } from "hooks/useDatabase";
+import { useDatabase } from "../../../../_hooks/useDatabase";
 import { MessagesTable } from "types/MessagesTable";
-import { useAuth } from "hooks/useAuth";
+import { useAuth } from "../../../../_hooks/useAuth";
 
 export function Messages() {
   const database = useDatabase();

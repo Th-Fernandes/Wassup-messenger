@@ -4,7 +4,7 @@ import React, { FormEvent, useContext } from "react";
 import { NextImage } from "components/Next/Image";
 
 import { useInputsValues } from "../../_hooks/useInputsValues";
-import { useAuth } from "hooks/useAuth";
+import { useAuth } from "../../../_hooks/useAuth";
 import { useToggleSignAction } from "../../_hooks/useToggleSignAction";
 
 import { SignTitle } from "./SignTitle";
