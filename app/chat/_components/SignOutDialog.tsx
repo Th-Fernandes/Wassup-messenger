@@ -1,4 +1,4 @@
-import { Dialog } from "@/_components/radix/Dialog";
+import { Dialog } from "@/_components/Dialog";
 import { useRouter } from "next/navigation";
 import { supabase } from "_utils/supabaseClient";
 

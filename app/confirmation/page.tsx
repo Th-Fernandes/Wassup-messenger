@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Dialog } from "@/_components/radix/Dialog";
+import { Dialog } from "@/_components/Dialog";
 
 export default function Confirmation() {
   const router = useRouter();
