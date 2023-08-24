@@ -1,7 +1,7 @@
 import { PaperPlaneTilt } from "phosphor-react";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { supabase } from "../../../_utils/supabaseClient";
-import { useDatabase } from "../../../_hooks/useDatabase";
+import { supabase } from "@/_utils/supabaseClient";
+import { useDatabase } from "@/_hooks/useDatabase";
 
 export function SendMessageForm() {
   const [message, setMessage] = useState<string>("");

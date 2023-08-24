@@ -1,10 +1,10 @@
-import illustration from "../../../_assets/images/index-demonstration.png";
+import illustration from "@/_assets/images/index-demonstration.png";
 
 import React, { FormEvent, useContext } from "react";
-import { NextImage } from "../../../_components/Next/Image";
+import { NextImage } from "@/_components/Next/Image";
 
+import { useAuth } from "@/_hooks/useAuth";
 import { useInputsValues } from "../../_hooks/useInputsValues";
-import { useAuth } from "../../../_hooks/useAuth";
 import { useToggleSignAction } from "../../_hooks/useToggleSignAction";
 
 import { SignTitle } from "./SignTitle";

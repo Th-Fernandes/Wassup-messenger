@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../../../../_utils/supabaseClient";
+import { supabase } from "@/_utils/supabaseClient";
 import ReceivedMessage from "./ReceivedMessage";
 import SendedMessage from "./SendedMessage";
 import { LogOutMessage } from "./LogOutMessage";
-import { useDatabase } from "../../../../_hooks/useDatabase";
-import { MessagesTable } from "../../../../_types/MessagesTable";
-import { useAuth } from "../../../../_hooks/useAuth";
+import { useDatabase } from "@/_hooks/useDatabase";
+import { MessagesTable } from "@/_types/MessagesTable";
+import { useAuth } from "@/_hooks/useAuth";
 
 export function Messages() {
   const database = useDatabase();

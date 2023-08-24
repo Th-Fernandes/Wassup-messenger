@@ -1,5 +1,5 @@
 import { UserCircle } from "phosphor-react";
-import type { MessagesTable } from "../../../../_types/MessagesTable";
+import type { MessagesTable } from "@/_types/MessagesTable";
 
 interface Props {
   messageData:MessagesTable

@@ -1,4 +1,4 @@
-import { NextImage } from "../../_components/Next/Image";
+import { NextImage } from "@/_components/Next/Image";
 
 export function AsideInfo() {
   return (

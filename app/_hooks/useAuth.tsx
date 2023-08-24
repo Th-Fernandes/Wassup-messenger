@@ -1,7 +1,7 @@
 import { ApiError } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 import React from "react"; 
-import { supabase } from "../_utils/supabaseClient";
+import { supabase } from "@/_utils/supabaseClient";
 
 export function useAuth() {
   const router = useRouter();

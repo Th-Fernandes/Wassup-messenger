@@ -1,4 +1,4 @@
-import { InputContainer } from "../../../_components/InputContainer";
+import { InputContainer } from "@/_components/InputContainer";
 
 interface Props {
   sign: string,

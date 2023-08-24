@@ -1,4 +1,4 @@
-import { Loading } from "../../../_components/Loading";
+import { Loading } from "@/_components/Loading";
 
 interface Props {
   onLoading: boolean;
